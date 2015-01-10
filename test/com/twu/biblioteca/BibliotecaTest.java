@@ -15,17 +15,31 @@ import static org.junit.Assert.assertEquals;
  */
 public class BibliotecaTest {
     final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-
+    //private String[] options = {"ListBooks"};
     @Test
     public void shouldCheckWelcomeMessgae() {
         BibliotecaApp.displayWelcomeMessage();
-        assertEquals("Hey...Welcome to Biblioteca", outContent.toString());
+        assertEquals("Hey...Welcome to Biblioteca\n", outContent.toString());
     }
     @Test
-    public void shouldCheckListOfOptions() throws IOException {
-        BibliotecaApp.listOfBooks();
-        assertEquals("1. Terms and Conditions\n2. Sherlock Holmes\n3. Diary of Wimpy Kid", outContent.toString());
+    public void shouldCheckListOfDetails() throws IOException {
+        BibliotecaApp.booksDetails();
+        assertEquals("1. Terms & Conditions Robert Glancy 2014\n" +
+                "2. Sherlock Holmes  Sir Author Connon Doyle 1887\n" +
+                "3. Diary of Wimpy Kid   Jeff Kinney 2007\n", outContent.toString());
     }
+
+    @Test
+    public void shouldListOptions() {
+        BibliotecaApp.options();
+        assertEquals("Choose from below:\nListBooks\nQuit\n", outContent.toString());
+    }
+    @Test
+    public void shouldCheckInValidOption(){
+        BibliotecaApp.checkInvalidOption("Books");
+        assertEquals("Select a valid option!", outContent.toString());
+    }
+
 
     @Before
     public void setUpStreams() {
@@ -38,7 +52,6 @@ public class BibliotecaTest {
         System.setOut(null);
 
     }
-
 
 
 }
