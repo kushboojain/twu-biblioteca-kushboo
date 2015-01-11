@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class BibliotecaTest {
     final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private String[] options = {"ListBooks", "Checkout Book", "Quit"};
+    private String[] options = {"ListBooks", "Checkout Book", "Return Book", "Quit"};
     @Before
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
@@ -79,5 +79,43 @@ public class BibliotecaTest {
     public void shouldCheckSuccessfulCheckout() throws IOException {
         assertEquals("Thank you! Enjoy the book", new BibliotecaApp().checkOutBook("Sherlock Holmes"));
     }
-    
+    @Test
+    public void shouldCheckUnSuccessfulCheckout() throws IOException {
+        BibliotecaApp biblioteca = new BibliotecaApp();
+        assertEquals("That book is not available", biblioteca.checkOutBook("Harry Potter"));
+
+    }
+
+    @Test
+    public void shouldCheckListIfUnSuccessfulCheckout() throws IOException {
+        BibliotecaApp biblioteca = new BibliotecaApp();
+        biblioteca.checkOutBook("Harry Potter");
+        biblioteca.booksDetails();
+        assertEquals("Terms & Conditions\t\tRobert Glancy\t\t2014\n" +
+                "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
+                "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n", outContent.toString());
+
+    }
+    @Test
+    public void shouldCheckReturnStatus() throws IOException {
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        bibliotecaApp.checkOutBook("Sherlock Holmes");
+        bibliotecaApp.checkInBook("Sherlock Holmes");
+        bibliotecaApp.booksDetails();
+        assertEquals("Terms & Conditions\t\tRobert Glancy\t\t2014\n" +
+                "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
+                "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n", outContent.toString());
+
+    }
+    @Test
+    public void shouldCheckReturnMessage() throws IOException {
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        bibliotecaApp.checkOutBook("Sherlock Holmes");
+        assertEquals("Thank you for returning the book", bibliotecaApp.checkInBook("Sherlock Holmes"));
+    }
+
+    @Test
+    public void shouldCheckUnsuccessfulReturn() throws IOException {
+        assertEquals("That is not a valid book to return", new BibliotecaApp().checkInBook("Harry Potter"));
+    }
 }

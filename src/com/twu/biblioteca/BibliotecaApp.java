@@ -6,8 +6,8 @@ import java.util.Arrays;
 
 public class BibliotecaApp {
 
-    private  String[] availableOptions = {"ListBooks","Checkout Book", "Quit"};
-    private  ArrayList<BibliotecaBook> books = new ArrayList<BibliotecaBook>();
+    private  String[] availableOptions = {"ListBooks","Checkout Book", "Return Book", "Quit"};
+    private  ArrayList<bibliotecaBook> books = new ArrayList<bibliotecaBook>();
 
     public BibliotecaApp() throws IOException {
         booksAtBiblioteca();
@@ -16,16 +16,13 @@ public class BibliotecaApp {
     public  void main(String[] args) throws IOException {
 
         displayWelcomeMessage();
-        booksAtBiblioteca();
-        options();
-        String optionFromUser = getOptionFromUser();
-        for (BibliotecaBook book : books) {
-            System.out.println(book.bookName);
+        while(true) {
+            options();
+            String optionFromUser = getOptionFromUser();
         }
 
+
     }
-
-
 
     private  String getOptionFromUser() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -38,7 +35,7 @@ public class BibliotecaApp {
     }
 
     public  void booksDetails()  {
-        for (BibliotecaBook book : books) {
+        for (bibliotecaBook book : books) {
             if(book.getStatus() == false)
                 System.out.print(book.details());
         }
@@ -52,7 +49,7 @@ public class BibliotecaApp {
         BufferedReader brFile = new BufferedReader(fileReader);
         while((bookDetails = brFile.readLine()) != null) {
             String attributes[] = bookDetails.split(",");
-            books.add(new BibliotecaBook(attributes[0], attributes[1], attributes[2]));
+            books.add(new bibliotecaBook(attributes[0], attributes[1], attributes[2]));
         }
     }
 
@@ -75,12 +72,23 @@ public class BibliotecaApp {
     }
 
     public  String checkOutBook(String selectedBook) {
-        for(BibliotecaBook book: books){
-            if(book.bookName.equals(selectedBook)) {
+        for(bibliotecaBook book: books){
+            if(book.getBookName().equals(selectedBook)) {
                 book.borrowed = true;
                 return "Thank you! Enjoy the book";
             }
         }
-        return null;
+        return "That book is not available";
+    }
+
+    public String checkInBook(String bookName) {
+        for (bibliotecaBook book : books) {
+            if(book.getBookName().equals(bookName)) {
+                book.setBorrowed(false);
+                return "Thank you for returning the book";
+            }
+        }
+
+        return "That is not a valid book to return";
     }
 }
