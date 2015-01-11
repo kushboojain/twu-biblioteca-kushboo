@@ -2,22 +2,22 @@ package com.twu.biblioteca;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BibliotecaApp {
 
-    private static ArrayList<String> availableOptions= new ArrayList<String>();
+    private static String[] availableOptions = {"ListBooks","Quit"};
 
-    public static void setAvailableOptions() {
-        availableOptions.add("ListBooks");
-        availableOptions.add("Quit");
-    }
 
     public static void main(String[] args) throws IOException {
+
         displayWelcomeMessage();
         options();
         String optionFromUser = getOptionFromUser();
-        checkInvalidOption(optionFromUser);
+        System.out.print(checkInvalidOption(optionFromUser));
     }
+
+
 
     private static String getOptionFromUser() throws IOException {
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -39,7 +39,6 @@ public class BibliotecaApp {
     }
 
     public static void options() {
-        setAvailableOptions();
         System.out.println("Choose from below:");
         for (String availableOption : availableOptions) {
             System.out.println(availableOption);
@@ -47,12 +46,13 @@ public class BibliotecaApp {
 
     }
 
-    public static void checkInvalidOption(String option) {
-        if(!availableOptions.contains(option)) {
+    public static boolean checkInvalidOption(String option) {
+        if (!(Arrays.asList(availableOptions).contains(option))) {
             System.out.print("Select a valid option!");
+            return true;
         }
-
+        else
+            return false;
     }
-
 
 }
