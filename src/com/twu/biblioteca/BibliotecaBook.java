@@ -4,10 +4,10 @@ package com.twu.biblioteca;
  * Created by khusbooj on 11/01/15.
  */
 public class bibliotecaBook {
-    public String bookName;
-    public boolean borrowed;
-    public String author;
-    public String year;
+    private String bookName;
+    private boolean borrowed;
+    private String author;
+    private String year;
 
     public bibliotecaBook(String bookName, String author, String year) {
         this.bookName = bookName;

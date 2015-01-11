@@ -19,9 +19,26 @@ public class BibliotecaApp {
         while(true) {
             options();
             String optionFromUser = getOptionFromUser();
+            if(checkInvalidOption(optionFromUser)) {
+                continue;
+            }
+            if (optionFromUser.equals("ListBooks")) {
+                booksDetails();
+            } else if (optionFromUser.equals("Checkout Book")) {
+                System.out.println("Enter the book name you would like to borrow:");
+                checkOutBook(readUserInput());
+            } else if (optionFromUser.equals("Return Book")) {
+                System.out.println("Enter the name of the book you are returning:");
+                checkInBook(readUserInput());
+            } else if (optionFromUser.equals("Quit")) {
+                System.exit(1);
+            }
         }
+    }
 
-
+    private String readUserInput() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        return br.readLine();
     }
 
     private  String getOptionFromUser() throws IOException {
@@ -39,8 +56,6 @@ public class BibliotecaApp {
             if(book.getStatus() == false)
                 System.out.print(book.details());
         }
-
-
     }
 
     public  void booksAtBiblioteca() throws IOException {
@@ -52,7 +67,6 @@ public class BibliotecaApp {
             books.add(new bibliotecaBook(attributes[0], attributes[1], attributes[2]));
         }
     }
-
 
     public  void options() {
         System.out.println("Choose from below:");
@@ -74,7 +88,7 @@ public class BibliotecaApp {
     public  String checkOutBook(String selectedBook) {
         for(bibliotecaBook book: books){
             if(book.getBookName().equals(selectedBook)) {
-                book.borrowed = true;
+                book.setBorrowed(true);
                 return "Thank you! Enjoy the book";
             }
         }
@@ -88,7 +102,6 @@ public class BibliotecaApp {
                 return "Thank you for returning the book";
             }
         }
-
         return "That is not a valid book to return";
     }
 }
