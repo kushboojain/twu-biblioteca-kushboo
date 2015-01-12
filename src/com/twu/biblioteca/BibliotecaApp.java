@@ -13,27 +13,30 @@ public class BibliotecaApp {
         booksAtBiblioteca();
     }
 
-    public  void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
+        BibliotecaApp bibliotecaApp = new BibliotecaApp();
+        bibliotecaApp.displayWelcomeMessage();
+        String optionFromUser;
 
-        displayWelcomeMessage();
-        while(true) {
-            options();
-            String optionFromUser = getOptionFromUser();
-            if(checkInvalidOption(optionFromUser)) {
-                continue;
-            }
-            if (optionFromUser.equals("ListBooks")) {
-                booksDetails();
-            } else if (optionFromUser.equals("Checkout Book")) {
-                System.out.println("Enter the book name you would like to borrow:");
-                checkOutBook(readUserInput());
-            } else if (optionFromUser.equals("Return Book")) {
-                System.out.println("Enter the name of the book you are returning:");
-                checkInBook(readUserInput());
-            } else if (optionFromUser.equals("Quit")) {
-                System.exit(1);
-            }
-        }
+            do {
+                bibliotecaApp.options();
+                optionFromUser = bibliotecaApp.getOptionFromUser();
+
+                if (bibliotecaApp.checkInvalidOption(optionFromUser)) {
+                    continue;
+                }
+                if (optionFromUser.equals("ListBooks")) {
+                    bibliotecaApp.booksDetails();
+                } else if (optionFromUser.equals("Checkout Book")) {
+                    System.out.println("Enter the book name you would like to borrow:");
+                    System.out.println(bibliotecaApp.checkOutBook(bibliotecaApp.readUserInput()));
+                } else if (optionFromUser.equals("Return Book")) {
+                    System.out.println("Enter the name of the book you are returning:");
+                    System.out.println(bibliotecaApp.checkInBook(bibliotecaApp.readUserInput()));
+                }
+                System.out.println();
+            } while (!optionFromUser.equals("Quit"));
+
     }
 
     private String readUserInput() throws IOException {
