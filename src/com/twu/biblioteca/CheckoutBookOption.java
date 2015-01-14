@@ -4,12 +4,12 @@ package com.twu.biblioteca;
  * Created by khusbooj on 14/01/15.
  */
 public class CheckoutBookOption extends Option {
-    private final Librarian manager;
+    private final LibrarianInterface interfaceLibrarianInterface;
     private final UserInterface userInterface;
 
     @Override
     public void performedAction() {
-        manager.performCheckout(userInterface);
+        interfaceLibrarianInterface.performCheckout();
     }
 
     @Override
@@ -17,8 +17,8 @@ public class CheckoutBookOption extends Option {
         return "Checkout Book";
     }
 
-    public CheckoutBookOption(Librarian manager, UserInterface userInterface) {
-        this.manager = manager;
+    public CheckoutBookOption(LibrarianInterface interfaceLibrarianInterface, UserInterface userInterface) {
+        this.interfaceLibrarianInterface = interfaceLibrarianInterface;
         this.userInterface = userInterface;
         name = setOptionName();
     }

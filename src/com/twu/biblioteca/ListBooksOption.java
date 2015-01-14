@@ -4,16 +4,16 @@ package com.twu.biblioteca;
  * Created by khusbooj on 13/01/15.
  */
 public class ListBooksOption extends Option {
-    private Librarian manager;
+    private LibrarianInterface librarianInterfaceInterface;
     private UserInterface userInterface;
 
     @Override
     public void performedAction() {
-        userInterface.print(manager.listBooksDetails());
+        userInterface.print(librarianInterfaceInterface.listBooksDetails());
     }
 
-    public ListBooksOption(Librarian manager, UserInterface userInterface) {
-        this.manager = manager;
+    public ListBooksOption(LibrarianInterface librarianInterfaceInterface, UserInterface userInterface) {
+        this.librarianInterfaceInterface = librarianInterfaceInterface;
         this.userInterface = userInterface;
         name = setOptionName();
     }

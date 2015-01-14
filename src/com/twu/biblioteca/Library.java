@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import java.io.*;
 import java.util.*;
 
 /**
@@ -27,58 +26,31 @@ public class Library {
         availableBooks = books;
     }
 
-    public boolean checkoutBook(String bookName) {
-        if(isValidBookNameForCheckout(bookName)) {
-            int index = -1;
-            for (Book availableBook : availableBooks) {
-                index++;
-                if (availableBook.getBookName().equals(bookName)) {
-                    break;
-                }
-            }
-            Book borrowed = availableBooks.get(index);
-            availableBooks.remove(borrowed);
-            borrowedBooks.add(borrowed);
-            return true;
-        }
-        else
-            return false;
-
+    public void checkoutBook(Book borrowedBook) {
+            availableBooks.remove(borrowedBook);
+            borrowedBooks.add(borrowedBook);
     }
 
-    public boolean checkinBook(String bookName) {
-        if(isValidBookNameForCheckin(bookName)) {
-            int index = -1;
-            for (Book borrowedBooks : this.borrowedBooks) {
-                index++;
-                if (borrowedBooks.getBookName().equals(bookName)) {
-                    break;
-                }
-            }
-            Book returned = borrowedBooks.get(index);
-            borrowedBooks.remove(returned);
-            availableBooks.add(returned);
-            return true;
-        }
-
-        return false;
+    public void checkinBook(Book returnedBook) {
+            borrowedBooks.remove(returnedBook);
+            availableBooks.add(returnedBook);
     }
 
-    public boolean isValidBookNameForCheckout(String bookName) {
+    public Book getBookForCheckout(String bookName) {
         for (Book availableBook : availableBooks) {
             if(availableBook.getBookName().equals(bookName)) {
-                return true;
+                return availableBook;
             }
         }
-        return false;
+        return null;
     }
 
-    public boolean isValidBookNameForCheckin(String bookName) {
+    public Book getBookForCheckin(String bookName) {
         for (Book borrowedBook : borrowedBooks) {
             if(borrowedBook.getBookName().equals(bookName)) {
-                return true;
+                return borrowedBook;
             }
         }
-        return false;
+        return null;
     }
 }

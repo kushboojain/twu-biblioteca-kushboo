@@ -7,7 +7,9 @@ import org.junit.Test;
 import java.io.*;
 import java.util.ArrayList;
 
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -29,51 +31,37 @@ public class LibrarayTest {
     }
 
     @Test
-    public void shouldCheckListOfBooks() throws IOException {
+    public void shouldCheckListOfBooks()  {
         assertEquals(new Library(books).getAvailableBooksDetails(), "Terms & Conditions\t\tRobert Glancy\t\t2014\n" +
                 "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
                 "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n");
     }
     @Test
-    public void shouldCheckValidBookNameForCheckout() throws IOException {
-        assertTrue(new Library(books).isValidBookNameForCheckout("Sherlock Holmes"));
+    public void shouldCheckValidBookNameForCheckout()  {
+        assertNotNull(new Library(books).getBookForCheckout("Sherlock Holmes"));
     }
     @Test
-    public void shouldCheckInvalidBookNameForCheckout() throws IOException {
-        assertFalse(new Library(books).isValidBookNameForCheckout("Harry Potter"));
+    public void shouldCheckInvalidBookNameForCheckout()  {
+        assertNull(new Library(books).getBookForCheckout("Harry Potter"));
     }
     @Test
-    public void shouldCheckValidCheckin() throws IOException {
+    public void shouldCheckValidCheckinOfBook()  {
         Library biblioteca = new Library(books);
-        String bookName = "Sherlock Holmes";
-        biblioteca.checkoutBook(bookName);
-        assertTrue(biblioteca.isValidBookNameForCheckin(bookName));
+        Book borrowedBook = books.get(0);
+        biblioteca.checkoutBook(borrowedBook);
+        biblioteca.checkinBook(borrowedBook);
+        assertEquals(biblioteca.getAvailableBooksDetails(), "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
+                "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n" +
+                "Terms & Conditions\t\tRobert Glancy\t\t2014\n");
     }
 
     @Test
-    public void shouldCheckInvalidCheckin() throws IOException {
-        assertFalse(new Library(books).isValidBookNameForCheckin("Sherlock"));
-    }
-
-    @Test
-    public void shouldCheckForValidCheckoutOfBook() throws IOException {
-        assertTrue(new Library(books).checkoutBook("Sherlock Holmes"));
-    }
-    @Test
-    public void shouldCheckForValidCheckinOfBook() throws IOException {
-        String bookName = "Terms & Conditions";
+    public void shouldCheckValidCheckoutOfBook()  {
         Library biblioteca = new Library(books);
-        biblioteca.checkoutBook(bookName);
-        assertTrue(biblioteca.checkinBook(bookName));
-
-    } @Test
-    public void shouldCheckForInvalidCheckoutOfBook() throws IOException {
-        assertFalse(new Library(books).checkoutBook("Sherlock"));
+        biblioteca.checkoutBook(books.get(0));
+        assertEquals(biblioteca.getAvailableBooksDetails(), "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
+                "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n");
     }
-    @Test
-    public void shouldCheckForInvalidCheckinOfBook() throws IOException {
-        assertFalse(new Library(books).checkinBook("Wall Street"));
 
-    }
 
 }

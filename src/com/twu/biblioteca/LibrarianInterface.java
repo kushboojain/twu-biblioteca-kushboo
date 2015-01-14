@@ -6,38 +6,60 @@ package com.twu.biblioteca;
 public class LibrarianInterface {
 
     Library biblioteca;
+    UserInterface userInterface;
 
-    public LibrarianInterface(Library library)  {
+    public LibrarianInterface(Library library, UserInterface userInterface)  {
         biblioteca = library;
+        this.userInterface = userInterface;
     }
 
-    public void performCheckout(UserInterface userInterface) {
-        userInterface.print("Enetr a book name:\n");
-        String bookName = userInterface.readUserInput();
-            Book borrowed;
+    public void performCheckout() {
+        printDelegation("Enetr a book name:\n");
+        String bookName = getInputFromUser();
+        String message = checkOutProcess(bookName);
+        printDelegation(message);
+    }
+
+    String checkOutProcess(String bookName) {
+        Book borrowed;
         if((borrowed = biblioteca.getBookForCheckout(bookName)) != null){
             biblioteca.checkoutBook(borrowed);
-            userInterface.print("Thank you! Enjoy the book\n");
+            return ("Thank you! Enjoy the book\n");
 
         }
         else
-            userInterface.print("That book is not available");
+            return ("That book is not available\n");
+    }
+
+    private String getInputFromUser() {
+        return userInterface.readUserInput();
     }
 
 
-    public void performCheckin(UserInterface userInterface) {
+    public void performCheckin() {
         userInterface.print("Enter the name of the book to return");
-        String bookName = userInterface.readUserInput();
+        String bookName = getInputFromUser();
+        checkInProcess(bookName);
+    }
+
+    String checkInProcess(String bookName) {
         Book returnedBook;
         if((returnedBook = biblioteca.getBookForCheckin(bookName)) != null) {
             biblioteca.checkinBook(returnedBook);
-            userInterface.print("Thank you for returning the book\n");
+            return ("Thank you for returning the book\n");
         }
         else
-            userInterface.print("That is not a valid book to return");
+            return ("That is not a valid book to return\n");
+    }
+
+    private void printDelegation(String message) {
+        userInterface.print(message);
     }
 
     public String listBooksDetails() {
         return biblioteca.getAvailableBooksDetails();
     }
+
+
+
 }
