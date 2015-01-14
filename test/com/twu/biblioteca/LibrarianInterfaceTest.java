@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by khusbooj on 13/01/15.
  */
-public class LibrarianTest {
+public class LibrarianInterfaceTest {
     private ArrayList<Book> books = new ArrayList<Book>();
 
     @Before
@@ -33,43 +33,43 @@ public class LibrarianTest {
 
     @Test
     public void shouldCheckSuccessfulCheckoutMessage()  {
-        assertEquals("Thank you! Enjoy the book", new Librarian(new Library(books)).performCheckout("Sherlock Holmes"));
+        assertEquals("Thank you! Enjoy the book", new LibrarianInterface(new Library(books)).performCheckout("Sherlock Holmes"));
     }
     @Test
     public void shouldCheckUnsuccessfulCheckoutMessage()  {
-        assertEquals("That book is not available", new Librarian(new Library(books)).performCheckout("Harry Potter"));
+        assertEquals("That book is not available", new LibrarianInterface(new Library(books)).performCheckout("Harry Potter"));
     }
 
     @Test
     public void shouldCheckForIncorrectMessageForSucceesfulCheckout()  {
-        assertThat(new Librarian(new Library(books)).performCheckout("Sherlock Holmes"), not("That book is not available"));
+        assertThat(new LibrarianInterface(new Library(books)).performCheckout("Sherlock Holmes"), not("That book is not available"));
     }
     @Test
     public void shouldCheckIncorrectMessageForUnsucessfulCheckout()  {
-        assertThat(new Librarian(new Library(books)).performCheckout("Harry"), not("Thank you! Enjoy the book"));
+        assertThat(new LibrarianInterface(new Library(books)).performCheckout("Harry"), not("Thank you! Enjoy the book"));
     }
 
     @Test
     public void shouldCheckSuccessfulCheckinMessage()  {
         String bookName = "Terms & Conditions";
-        Librarian librarian = new Librarian(new Library(books));
-        librarian.performCheckout(bookName);
-        assertThat(librarian.performCheckin(bookName), is("Thank you for returning the book"));
+        LibrarianInterface librarianInterface = new LibrarianInterface(new Library(books));
+        librarianInterface.performCheckout(bookName);
+        assertThat(librarianInterface.performCheckin(bookName), is("Thank you for returning the book"));
     }
     @Test
     public void shouldCheckUnsuccessfulCheckinMessage() throws IOException {
-        assertThat(new Librarian(new Library(books)).performCheckin("Harry Potter"), is("That is not a valid book to return"));
+        assertThat(new LibrarianInterface(new Library(books)).performCheckin("Harry Potter"), is("That is not a valid book to return"));
     }
 
     @Test
     public void shouldCheckForIncorrectMessageForSucceesfulCheckin() throws IOException {
 
-        Librarian librarian = new Librarian(new Library(books));
-        librarian.performCheckout("Sherlock Holmes");
-        assertThat(librarian.performCheckin("Sherlock Holmes"), not("That is not a valid book to return"));
+        LibrarianInterface librarianInterface = new LibrarianInterface(new Library(books));
+        librarianInterface.performCheckout("Sherlock Holmes");
+        assertThat(librarianInterface.performCheckin("Sherlock Holmes"), not("That is not a valid book to return"));
     }
     @Test
     public void shouldCheckIncorrectMessageForUnsucessfulCheckin() throws IOException {
-        assertThat(new Librarian(new Library(books)).performCheckin("Harry"), not("Thank you! Enjoy the book"));
+        assertThat(new LibrarianInterface(new Library(books)).performCheckin("Harry"), not("Thank you! Enjoy the book"));
     }
 }
