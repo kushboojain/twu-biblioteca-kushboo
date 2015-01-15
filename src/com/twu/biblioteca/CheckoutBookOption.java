@@ -8,7 +8,7 @@ public class CheckoutBookOption extends Option {
 
     @Override
     public void performedAction() {
-        interfaceLibrarianInterface.performCheckout();
+        interfaceLibrarianInterface.performCheckoutOfBook();
     }
 
     @Override

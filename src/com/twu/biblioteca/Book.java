@@ -5,25 +5,21 @@ import java.util.ArrayList;
 /**
  * Created by khusbooj on 11/01/15.
  */
-public class Book {
-    private String bookName;
+public class Book extends Item {
     private String author;
     private String year;
 
     public Book(String bookName, String author, String year) {
-        this.bookName = bookName;
+        name = bookName;
         this.author = author;
         this.year = year;
     }
 
-    public String getBookName() {
-        return bookName;
-    }
 
 
     public ArrayList<String> details() {
         ArrayList<String> detail = new ArrayList<String>();
-        detail.add(bookName);
+        detail.add(name);
         detail.add(author);
         detail.add(year);
         return detail;

@@ -5,18 +5,22 @@ import java.util.ArrayList;
 
 public class BibliotecaApp {
 
-    private  ArrayList<Book> books = new ArrayList<Book>();
+    private  ArrayList<Item> books;
     UserInterface userInterface = new UserInterface();
-    protected LibrarianInterface librarianInterface = new LibrarianInterface(new Library(books), userInterface);
-    private  Option[] availableOptions = {new ListBooksOption(librarianInterface),new CheckoutBookOption(librarianInterface), new ReturnBookOption(librarianInterface), new QuitOption()};
+    private ArrayList<Item> movies;
+    protected LibrarianInterface librarianInterface;
+    private  Option[] availableOptions;
     public static void main(String[] args) throws IOException {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.initializeBooksAtBiblioteca();
+        bibliotecaApp.initializeBooks();
+        bibliotecaApp.initializeMovies();
         bibliotecaApp.launch();
 
     }
 
     private void launch() throws IOException {
+        librarianInterface = new LibrarianInterface(new Library(books), new Library(movies),userInterface);
+        availableOptions = new Option[]{new ListBooksOption(librarianInterface), new ListMoviesOption(librarianInterface), new CheckoutBookOption(librarianInterface), new ReturnBookOption(librarianInterface), new CheckoutMovieOption(librarianInterface), new ReturnMovieOption(librarianInterface), new QuitOption()};
         userInterface.displayWelcomeMessage();
         String optionFromUser;
         do {
@@ -48,7 +52,8 @@ public class BibliotecaApp {
         }
     }
 
-    public  void initializeBooksAtBiblioteca() throws IOException {
+    public  void initializeBooks() throws IOException {
+        books = new ArrayList<Item>();
         FileReader fileReader = new FileReader(new File("src/com/twu/biblioteca/Books"));
         String bookDetails;
         BufferedReader brFile = new BufferedReader(fileReader);
@@ -67,4 +72,14 @@ public class BibliotecaApp {
         return true;
     }
 
+    public void initializeMovies() throws IOException {
+        movies = new ArrayList<Item>();
+        FileReader fileReader = new FileReader(new File("src/com/twu/biblioteca/Movies"));
+        String movieDetails;
+        BufferedReader brFile = new BufferedReader(fileReader);
+        while((movieDetails = brFile.readLine()) != null) {
+            String attributes[] = movieDetails.split(",");
+            movies.add(new Movie(attributes[0], attributes[1], attributes[2], attributes[3]));
+        }
+    }
 }

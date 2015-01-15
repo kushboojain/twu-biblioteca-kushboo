@@ -1,25 +1,25 @@
 package com.twu.biblioteca;
 
 /**
- * Created by khusbooj on 14/01/15.
+ * Created by khusbooj on 15/01/15.
  */
-public class ReturnBookOption extends Option {
+public class ReturnMovieOption extends Option {
     LibrarianInterface librarianInterfaceInterface;
 
 
-    public ReturnBookOption(LibrarianInterface librarianInterfaceInterface) {
+    public ReturnMovieOption(LibrarianInterface librarianInterfaceInterface) {
         name = setOptionName();
         this.librarianInterfaceInterface = librarianInterfaceInterface;
     }
     @Override
     public void performedAction() {
-        librarianInterfaceInterface.performCheckinOfBook();
+        librarianInterfaceInterface.performCheckinOfMovie();
     }
 
 
     @Override
     protected String setOptionName() {
-        return "Return Book";
+        return "Return Movie";
 
     }
 }

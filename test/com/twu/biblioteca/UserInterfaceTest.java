@@ -36,4 +36,5 @@ public class UserInterfaceTest {
         new UserInterface().print("x");
         assertEquals("x", outContent.toString());
     }
+
 }

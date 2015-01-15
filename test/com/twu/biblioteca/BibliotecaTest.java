@@ -10,7 +10,6 @@ import static org.junit.Assert.assertTrue;
  * Created by khusbooj on 10/01/15.
  */
 public class BibliotecaTest {
-    private String[] options = {"ListBooks", "Checkout Book", "Return Book", "Quit"};
 
     @Test
     public void shouldCheckTrueForInvalidOption()  {
@@ -32,6 +31,16 @@ public class BibliotecaTest {
     @Test
     public void shouldCheckValidOptionQuit() {
         assertEquals(new BibliotecaApp().isInvalidOption("Quit"), false);
+    }
+
+    @Test
+    public void shouldCheckValidOptionCheckinMovie() {
+        assertEquals(new BibliotecaApp().isInvalidOption("Checkin Movie"), false);
+    }
+
+    @Test
+    public void shouldCheckValidOptionCheckoutMovie() {
+        assertEquals(new BibliotecaApp().isInvalidOption("Checkout Movie"), false);
     }
 
 }

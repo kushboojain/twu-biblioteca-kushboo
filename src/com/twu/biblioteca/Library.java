@@ -6,47 +6,51 @@ import java.util.*;
  * Created by khusbooj on 13/01/15.
  */
 public class Library {
-    ArrayList<Book> availableBooks = new ArrayList<Book>();
-    ArrayList<Book> borrowedBooks = new ArrayList<Book>();
+    ArrayList<Item> availableItems = new ArrayList<Item>();
+    ArrayList<Item> borrowedItems = new ArrayList<Item>();
 
 
 
-    public ArrayList<ArrayList<String>> getAvailableBooksDetails() {
-        ArrayList<ArrayList<String>> detailsOfBooks = new ArrayList<ArrayList<String>>();
-        for (Book book : availableBooks) {
-            detailsOfBooks.add(book.details());
+    public ArrayList<ArrayList<String>> getAvailableItemDetails() {
+        ArrayList<ArrayList<String>> detailsOfItems = new ArrayList<ArrayList<String>>();
+        for (Item item : availableItems) {
+            detailsOfItems.add(item.details());
         }
 
-        return detailsOfBooks;
+        return detailsOfItems;
     }
 
-    public Library(ArrayList<Book> books)  {
-        availableBooks = books;
+    public Library(ArrayList<Item> items)  {
+        for (int i = 0; i < items.size(); i++) {
+            Item item = items.get(i);
+            availableItems.add(item);
+        }
+
     }
 
-    public void checkoutBook(Book borrowedBook) {
-            availableBooks.remove(borrowedBook);
-            borrowedBooks.add(borrowedBook);
+    public void checkoutItem(Item borrowedItem) {
+            availableItems.remove(borrowedItem);
+            borrowedItems.add(borrowedItem);
     }
 
-    public void checkinBook(Book returnedBook) {
-            borrowedBooks.remove(returnedBook);
-            availableBooks.add(returnedBook);
+    public void checkinItem(Item returnedItem) {
+            borrowedItems.remove(returnedItem);
+            availableItems.add(returnedItem);
     }
 
-    public Book getBookForCheckout(String bookName) {
-        for (Book availableBook : availableBooks) {
-            if(availableBook.getBookName().equals(bookName)) {
-                return availableBook;
+    public Item getItemForCheckout(String itemName) {
+        for (Item availableItem : availableItems) {
+            if(availableItem.getName().equals(itemName)) {
+                return availableItem;
             }
         }
         return null;
     }
 
-    public Book getBookForCheckin(String bookName) {
-        for (Book borrowedBook : borrowedBooks) {
-            if(borrowedBook.getBookName().equals(bookName)) {
-                return borrowedBook;
+    public Item getItemForCheckin(String itemName) {
+        for (Item borrowedItem : borrowedItems) {
+            if(borrowedItem.getName().equals(itemName)) {
+                return borrowedItem;
             }
         }
         return null;
