@@ -94,7 +94,7 @@ public class UserInterface {
         print("Enter your password");
         return readUserInputForProcessing();
     }
-    public void signOut() {
+    public void displaySignOutMessage() {
         print("Bye");
     }
 
@@ -102,6 +102,14 @@ public class UserInterface {
         if(status)
             print("Sucesfully Logged in");
         else
-            print("Wrong credentials");
+            print("Wrong credentials!");
+    }
+
+    public void displayCustomerDetails(ArrayList<String> customerLoggedInDetails) {
+        print("Your Details:\n");
+        for (String customerLoggedInDetail : customerLoggedInDetails) {
+            print(customerLoggedInDetail + "\n");
+        }
+
     }
 }

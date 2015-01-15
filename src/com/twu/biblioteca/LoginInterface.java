@@ -9,14 +9,22 @@ public class LoginInterface {
 
     private UserInterface userInterface;
     private ArrayList<CustomerDetails> customers;
+    private MenuInterface menuInterface;
 
-
-    public LoginInterface(UserInterface userInterface, ArrayList<CustomerDetails> customers) {
+    public LoginInterface(UserInterface userInterface, ArrayList<CustomerDetails> customers, MenuInterface menuInterface) {
         this.userInterface = userInterface;
         this.customers = customers;
+        this.menuInterface = menuInterface;
     }
 
-    public CustomerDetails signIn() {
+    public void signIn() {
+        CustomerDetails loggedInCustomer = performSignIn();
+        menuInterface.setLoggedInCustomer(loggedInCustomer);
+        userInterface.displaySignInStatus(getStatusOfLogin(loggedInCustomer));
+        menuInterface.updateListAfterLogin();
+    }
+
+    private CustomerDetails performSignIn() {
         String number = userInterface.signinNumber();
         String password = userInterface.signinPassword();
         for (CustomerDetails customer : customers) {
@@ -24,6 +32,17 @@ public class LoginInterface {
                 return customer;
         }
         return null;
+    }
+    boolean getStatusOfLogin(CustomerDetails loggedInCustomer) {
+        if(loggedInCustomer != null)
+            return true;
+        else
+            return false;
+    }
 
+    public void signOut() {
+        menuInterface.setLoggedInCustomer(null);
+        userInterface.displaySignOutMessage();
+        menuInterface.updateListAfterLogout();
     }
 }

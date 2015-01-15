@@ -10,8 +10,7 @@ public class BibliotecaApp {
     private ArrayList<Item> movies;
     protected LibrarianInterface librarianInterface;
     MenuInterface menuInterface;
-    LoginInterface loginInterface;
-    ArrayList<CustomerDetails> customers;
+    ArrayList<CustomerDetails> customers = new ArrayList<CustomerDetails>();
     public static void main(String[] args) throws IOException {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         bibliotecaApp.setInterfaces();
@@ -28,11 +27,11 @@ public class BibliotecaApp {
     void setInterfaces() throws IOException {
          initializeBooks();
          initializeMovies();
-         loginInterface = new LoginInterface(userInterface, customers);
          librarianInterface = new LibrarianInterface(new Library(books), new Library(movies), userInterface);
-         menuInterface = new MenuInterface(librarianInterface,loginInterface);
+         menuInterface = new MenuInterface(librarianInterface, userInterface, customers);
 
-     }
+
+    }
 
     private void launch() throws IOException {
         userInterface.displayWelcomeMessage();

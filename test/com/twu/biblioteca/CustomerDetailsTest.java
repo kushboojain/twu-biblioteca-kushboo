@@ -15,18 +15,12 @@ public class CustomerDetailsTest {
     String[] details = {"Kushboo","kush@gm.com", "23463"};
 
     @Test
-    public void shouldCheckLibraryNumberLength() {
-        assertEquals(customer.getLibraryNumber().length(), 8);
-    }
-    @Test
-    public void shouldCheckNotNullPassword() {
-        assertNotNull(customer.getPassword());
-    }
-    @Test
     public void shouldCheckCustomerDetails() {
         ArrayList<String> customerDetails = customer.getDetails();
         for (int i = 0; i < customerDetails.size(); i++) {
             String customerDetail = customerDetails.get(i);
             assertEquals(customerDetail, details[i]);
-        }}
+        }
+    }
+
 }
