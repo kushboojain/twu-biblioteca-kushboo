@@ -12,9 +12,5 @@ public class CustomerDetailsTest {
     public void shouldCheckLibraryNumberLength() {
         assertEquals(new CustomerDetails("123-4567").getLibraryNumber().length(), 8);
     }
-    
-    @Test
-    public void shouldCheckLibraryNumberFormat() {
 
-    }
 }

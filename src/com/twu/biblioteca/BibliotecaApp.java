@@ -12,15 +12,20 @@ public class BibliotecaApp {
     private  Option[] availableOptions;
     public static void main(String[] args) throws IOException {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.initializeBooks();
-        bibliotecaApp.initializeMovies();
+        bibliotecaApp.setInterfaces();
         bibliotecaApp.launch();
 
     }
 
+     void setInterfaces() throws IOException {
+         initializeBooks();
+         initializeMovies();
+         availableOptions = new Option[]{new ListBooksOption(librarianInterface), new ListMoviesOption(librarianInterface), new CheckoutBookOption(librarianInterface), new ReturnBookOption(librarianInterface), new CheckoutMovieOption(librarianInterface), new ReturnMovieOption(librarianInterface), new QuitOption()};
+         librarianInterface = new LibrarianInterface(new Library(books), new Library(movies),userInterface);
+
+    }
+
     private void launch() throws IOException {
-        librarianInterface = new LibrarianInterface(new Library(books), new Library(movies),userInterface);
-        availableOptions = new Option[]{new ListBooksOption(librarianInterface), new ListMoviesOption(librarianInterface), new CheckoutBookOption(librarianInterface), new ReturnBookOption(librarianInterface), new CheckoutMovieOption(librarianInterface), new ReturnMovieOption(librarianInterface), new QuitOption()};
         userInterface.displayWelcomeMessage();
         String optionFromUser;
         do {

@@ -1,6 +1,9 @@
 package com.twu.biblioteca;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -10,37 +13,43 @@ import static org.junit.Assert.assertTrue;
  * Created by khusbooj on 10/01/15.
  */
 public class BibliotecaTest {
+    BibliotecaApp app = new BibliotecaApp();
+
+    @Before
+    public void initialize() throws IOException {
+        app.setInterfaces();
+    }
 
     @Test
     public void shouldCheckTrueForInvalidOption()  {
-       assertTrue(new BibliotecaApp().isInvalidOption("Books"));
+       assertTrue(app.isInvalidOption("Books"));
     }
 
     @Test
     public void shouldCheckValidOptionListBooks() {
-        assertFalse(new BibliotecaApp().isInvalidOption("ListBooks"));
+        assertFalse(app.isInvalidOption("ListBooks"));
     }
     @Test
     public void shouldCheckValidOptionCheckoutBook() {
-        assertEquals(new BibliotecaApp().isInvalidOption("Checkout Book"), false);
+        assertEquals(app.isInvalidOption("Checkout Book"), false);
     }
     @Test
     public void shouldCheckValidOptionCheckinBook() {
-        assertEquals(new BibliotecaApp().isInvalidOption("Return Book"), false);
+        assertEquals(app.isInvalidOption("Return Book"), false);
     }
     @Test
     public void shouldCheckValidOptionQuit() {
-        assertEquals(new BibliotecaApp().isInvalidOption("Quit"), false);
+        assertEquals(app.isInvalidOption("Quit"), false);
     }
 
     @Test
     public void shouldCheckValidOptionCheckinMovie() {
-        assertEquals(new BibliotecaApp().isInvalidOption("Checkin Movie"), false);
+        assertEquals(app.isInvalidOption("Return Movie"), false);
     }
 
     @Test
     public void shouldCheckValidOptionCheckoutMovie() {
-        assertEquals(new BibliotecaApp().isInvalidOption("Checkout Movie"), false);
+        assertEquals(app.isInvalidOption("Checkout Movie"), false);
     }
 
 }
