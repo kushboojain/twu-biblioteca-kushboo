@@ -5,16 +5,14 @@ package com.twu.biblioteca;
  */
 public class ListBooksOption extends Option {
     private LibrarianInterface librarianInterfaceInterface;
-    private UserInterface userInterface;
 
     @Override
     public void performedAction() {
-        userInterface.print(librarianInterfaceInterface.listBooksDetails());
+        librarianInterfaceInterface.listBooksDetails();
     }
 
-    public ListBooksOption(LibrarianInterface librarianInterfaceInterface, UserInterface userInterface) {
+    public ListBooksOption(LibrarianInterface librarianInterfaceInterface) {
         this.librarianInterfaceInterface = librarianInterfaceInterface;
-        this.userInterface = userInterface;
         name = setOptionName();
     }
 

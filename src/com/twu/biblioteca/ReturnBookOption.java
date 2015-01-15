@@ -5,18 +5,17 @@ package com.twu.biblioteca;
  */
 public class ReturnBookOption extends Option {
     LibrarianInterface librarianInterfaceInterface;
-    private UserInterface userInterface;
 
+
+    public ReturnBookOption(LibrarianInterface librarianInterfaceInterface) {
+        name = setOptionName();
+        this.librarianInterfaceInterface = librarianInterfaceInterface;
+    }
     @Override
     public void performedAction() {
         librarianInterfaceInterface.performCheckin();
     }
 
-    public ReturnBookOption(LibrarianInterface librarianInterfaceInterface, UserInterface userInterface) {
-        this.userInterface = userInterface;
-        name = setOptionName();
-        this.librarianInterfaceInterface = librarianInterfaceInterface;
-    }
 
     @Override
     protected String setOptionName() {

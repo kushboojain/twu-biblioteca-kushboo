@@ -5,7 +5,6 @@ package com.twu.biblioteca;
  */
 public class CheckoutBookOption extends Option {
     private final LibrarianInterface interfaceLibrarianInterface;
-    private final UserInterface userInterface;
 
     @Override
     public void performedAction() {
@@ -17,9 +16,8 @@ public class CheckoutBookOption extends Option {
         return "Checkout Book";
     }
 
-    public CheckoutBookOption(LibrarianInterface interfaceLibrarianInterface, UserInterface userInterface) {
+    public CheckoutBookOption(LibrarianInterface interfaceLibrarianInterface) {
         this.interfaceLibrarianInterface = interfaceLibrarianInterface;
-        this.userInterface = userInterface;
         name = setOptionName();
     }
 }

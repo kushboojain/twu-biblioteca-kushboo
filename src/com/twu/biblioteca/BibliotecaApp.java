@@ -8,7 +8,7 @@ public class BibliotecaApp {
     private  ArrayList<Book> books = new ArrayList<Book>();
     UserInterface userInterface = new UserInterface();
     protected LibrarianInterface librarianInterface = new LibrarianInterface(new Library(books), userInterface);
-    private  Option[] availableOptions = {new ListBooksOption(librarianInterface, userInterface),new CheckoutBookOption(librarianInterface, userInterface), new ReturnBookOption(librarianInterface, userInterface), new QuitOption()};
+    private  Option[] availableOptions = {new ListBooksOption(librarianInterface),new CheckoutBookOption(librarianInterface), new ReturnBookOption(librarianInterface), new QuitOption()};
     public static void main(String[] args) throws IOException {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
         bibliotecaApp.initializeBooksAtBiblioteca();
@@ -17,19 +17,26 @@ public class BibliotecaApp {
     }
 
     private void launch() throws IOException {
-        displayWelcomeMessage();
+        userInterface.displayWelcomeMessage();
         String optionFromUser;
         do {
-            userInterface.print(optionsList());
-            optionFromUser = userInterface.readUserInput();
+            userInterface.displayMenu(getOptionsList());
+            optionFromUser = userInterface.readUserInputForProcessing();
             if(isInvalidOption(optionFromUser)) {
                 userInterface.print("Select a valid option!\n");
                 continue;
             }
             selectMenuOption(optionFromUser);
-
-            userInterface.print("\n");
         } while (!optionFromUser.equals("Quit"));
+    }
+
+    private ArrayList<String> getOptionsList() {
+        ArrayList<String> option = new ArrayList<String>();
+        for (Option availableOption : availableOptions) {
+            option.add(availableOption.getOptionName());
+        }
+
+        return option;
     }
 
     private void selectMenuOption(String optionFromUser) {
@@ -41,7 +48,6 @@ public class BibliotecaApp {
         }
     }
 
-
     public  void initializeBooksAtBiblioteca() throws IOException {
         FileReader fileReader = new FileReader(new File("src/com/twu/biblioteca/Books"));
         String bookDetails;
@@ -52,15 +58,6 @@ public class BibliotecaApp {
         }
     }
 
-    public  String optionsList() {
-        String optionsContent = "Choose from below:\n";
-        for (Option availableOption : availableOptions) {
-            optionsContent+= availableOption.getOptionName() + "\n";
-        }
-        return optionsContent;
-    }
-
-
     public boolean isInvalidOption(String option) {
         for (Option availableOption : availableOptions) {
             if(availableOption.getOptionName().equals(option)){
@@ -70,7 +67,4 @@ public class BibliotecaApp {
         return true;
     }
 
-    public void displayWelcomeMessage() {
-        userInterface.print("Welcome to Biblioteca");
-    }
 }

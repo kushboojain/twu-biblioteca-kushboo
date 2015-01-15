@@ -14,10 +14,10 @@ public class LibrarianInterface {
     }
 
     public void performCheckout() {
-        printDelegation("Enetr a book name:\n");
+        printToUserInterface("Enetr a book name:\n");
         String bookName = getInputFromUser();
         String message = checkOutProcess(bookName);
-        printDelegation(message);
+        printToUserInterface(message);
     }
 
     String checkOutProcess(String bookName) {
@@ -32,14 +32,14 @@ public class LibrarianInterface {
     }
 
     private String getInputFromUser() {
-        return userInterface.readUserInput();
+        return userInterface.readUserInputForProcessing();
     }
 
 
     public void performCheckin() {
-        userInterface.print("Enter the name of the book to return");
+        printToUserInterface("Enter the name of the book to return");
         String bookName = getInputFromUser();
-        checkInProcess(bookName);
+        printToUserInterface(checkInProcess(bookName));
     }
 
     String checkInProcess(String bookName) {
@@ -52,14 +52,11 @@ public class LibrarianInterface {
             return ("That is not a valid book to return\n");
     }
 
-    private void printDelegation(String message) {
+    private void printToUserInterface(String message) {
         userInterface.print(message);
     }
 
-    public String listBooksDetails() {
-        return biblioteca.getAvailableBooksDetails();
+    public void listBooksDetails() {
+        userInterface.displayBookDetails(biblioteca.getAvailableBooksDetails());
     }
-
-
-
 }

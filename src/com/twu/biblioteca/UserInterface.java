@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -17,7 +18,28 @@ public class UserInterface {
         output.print(content);
     }
 
-    public String readUserInput()  {
+    public String readUserInputForProcessing()  {
         return input.nextLine();
+    }
+
+    public void displayWelcomeMessage() {
+        print("Welcome to Biblioteca");
+    }
+
+    public void displayMenu(ArrayList<String> options) {
+        print("Choose from a option below:\n");
+        for (String option : options) {
+            print(option + "\n");
+        }
+
+    }
+
+    public void displayBookDetails(ArrayList<ArrayList<String>> detailsOfBooks) {
+        for (ArrayList<String> detail : detailsOfBooks) {
+            for (String bookParameter : detail) {
+                print(bookParameter + "\t\t");
+            }
+            print("\n");
+        }
     }
 }

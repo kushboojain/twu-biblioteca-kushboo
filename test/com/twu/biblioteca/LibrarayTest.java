@@ -4,20 +4,24 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Created by khusbooj on 13/01/15.
  */
+
 public class LibrarayTest {
     private ArrayList<Book> books = new ArrayList<Book>();
+    Library biblioteca = new Library(books);
+    private ArrayList<ArrayList<String>> actualDetails = new ArrayList<ArrayList<String>>();
 
     @Before
     public void initializeBooks() throws IOException {
@@ -27,40 +31,47 @@ public class LibrarayTest {
             while((bookDetails = brFile.readLine()) != null) {
                 String attributes[] = bookDetails.split(",");
                 books.add(new Book(attributes[0], attributes[1], attributes[2]));
+                ArrayList<String> detail = new ArrayList<String>();
+                detail.add(attributes[0]);
+                detail.add(attributes[1]);
+                detail.add(attributes[2]);
+                actualDetails.add(detail);
             }
     }
 
+
     @Test
-    public void shouldCheckListOfBooks()  {
-        assertEquals(new Library(books).getAvailableBooksDetails(), "Terms & Conditions\t\tRobert Glancy\t\t2014\n" +
-                "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
-                "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n");
+    public void shouldCheckAvailableBooksDetails()  {
+        ArrayList<ArrayList<String>> expectedDetails = biblioteca.getAvailableBooksDetails();
+        for (int i = 0, detailsSize = actualDetails.size(); i < detailsSize; i++) {
+            ArrayList<String> actualDetail = actualDetails.get(i);
+            ArrayList<String> expectedDetail = expectedDetails.get(i);
+            for (int j = 0, detailSize = actualDetail.size(); j < detailSize; j++) {
+                Assert.assertEquals(actualDetail.get(j), expectedDetail.get(j));
+            }
+        }
     }
     @Test
     public void shouldCheckValidBookNameForCheckout()  {
-        assertNotNull(new Library(books).getBookForCheckout("Sherlock Holmes"));
+        assertNotNull(biblioteca.getBookForCheckout("Sherlock Holmes"));
     }
     @Test
     public void shouldCheckInvalidBookNameForCheckout()  {
-        assertNull(new Library(books).getBookForCheckout("Harry Potter"));
+        assertNull(biblioteca.getBookForCheckout("Harry Potter"));
     }
     @Test
     public void shouldCheckValidCheckinOfBook()  {
-        Library biblioteca = new Library(books);
         Book borrowedBook = books.get(0);
         biblioteca.checkoutBook(borrowedBook);
         biblioteca.checkinBook(borrowedBook);
-        assertEquals(biblioteca.getAvailableBooksDetails(), "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
-                "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n" +
-                "Terms & Conditions\t\tRobert Glancy\t\t2014\n");
+        assertNotNull(biblioteca.getBookForCheckout(borrowedBook.getBookName()));
     }
 
     @Test
     public void shouldCheckValidCheckoutOfBook()  {
-        Library biblioteca = new Library(books);
-        biblioteca.checkoutBook(books.get(0));
-        assertEquals(biblioteca.getAvailableBooksDetails(), "Sherlock Holmes\t\tSir Author Connon Doyle\t\t1887\n" +
-                "Diary of Wimpy Kid\t\tJeff Kinney\t\t2007\n");
+        Book borrowedBook = books.get(0);
+        biblioteca.checkoutBook(borrowedBook);
+        assertNull(biblioteca.getBookForCheckout(borrowedBook.getBookName()));
     }
 
 

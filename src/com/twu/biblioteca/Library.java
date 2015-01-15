@@ -9,17 +9,15 @@ public class Library {
     ArrayList<Book> availableBooks = new ArrayList<Book>();
     ArrayList<Book> borrowedBooks = new ArrayList<Book>();
 
-    public String getAvailableBooksDetails() {
-         return iterateOnAvailableBooks();
-    }
 
-    private String iterateOnAvailableBooks() {
-        String bookDetails = "";
+
+    public ArrayList<ArrayList<String>> getAvailableBooksDetails() {
+        ArrayList<ArrayList<String>> detailsOfBooks = new ArrayList<ArrayList<String>>();
         for (Book book : availableBooks) {
-            bookDetails += book.details();
+            detailsOfBooks.add(book.details());
         }
 
-        return bookDetails;
+        return detailsOfBooks;
     }
 
     public Library(ArrayList<Book> books)  {

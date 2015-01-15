@@ -1,5 +1,7 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
+
 /**
  * Created by khusbooj on 11/01/15.
  */
@@ -19,8 +21,12 @@ public class Book {
     }
 
 
-    public String details() {
-        return bookName +"\t\t"+ author+ "\t\t"+ year +"\n";
+    public ArrayList<String> details() {
+        ArrayList<String> detail = new ArrayList<String>();
+        detail.add(bookName);
+        detail.add(author);
+        detail.add(year);
+        return detail;
     }
 
 }
