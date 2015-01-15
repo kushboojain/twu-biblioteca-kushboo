@@ -4,18 +4,16 @@ package com.twu.biblioteca;
  * Created by khusbooj on 15/01/15.
  */
 public class ListCustomerDetailsOption extends Option {
-    private final UserInterface userInterface;
-    private final CustomerDetails customerLoggedIn;
+    private LoginInterface loginInterface;
 
-    public ListCustomerDetailsOption(UserInterface userInterface, CustomerDetails customerLoggedIn) {
-
-        this.userInterface = userInterface;
-        this.customerLoggedIn = customerLoggedIn;
+    public ListCustomerDetailsOption(LoginInterface loginInterface) {
+        name = setOptionName();
+        this.loginInterface = loginInterface;
     }
 
     @Override
     public void performedAction() {
-        userInterface.displayCustomerDetails(customerLoggedIn.getDetails());
+        loginInterface.listDetails();
     }
 
     @Override

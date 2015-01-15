@@ -23,11 +23,11 @@ public class UserInterface {
     }
 
     public void displayWelcomeMessage() {
-        print("Welcome to Biblioteca");
+        print("Welcome to Biblioteca\n");
     }
 
     public void displayMenu(ArrayList<String> options) {
-        print("Choose from a option below:\n");
+        print("\nChoose from a option below:\n");
         for (String option : options) {
             print(option + "\n");
         }
@@ -100,9 +100,9 @@ public class UserInterface {
 
     public void displaySignInStatus(boolean status) {
         if(status)
-            print("Sucesfully Logged in");
+            print("Sucesfully Logged in\n");
         else
-            print("Wrong credentials!");
+            print("Wrong credentials!\n");
     }
 
     public void displayCustomerDetails(ArrayList<String> customerLoggedInDetails) {

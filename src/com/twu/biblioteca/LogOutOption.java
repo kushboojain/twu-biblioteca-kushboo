@@ -4,14 +4,12 @@ package com.twu.biblioteca;
  * Created by khusbooj on 15/01/15.
  */
 public class LogOutOption extends Option {
-    private final UserInterface userInterface;
-    private final MenuInterface menuInterface;
     private LoginInterface loginInterface;
 
-    public LogOutOption(UserInterface userInterface, MenuInterface menuInterface) {
+    public LogOutOption(LoginInterface loginInterface) {
+        this.loginInterface = loginInterface;
+        name = setOptionName();
 
-        this.userInterface = userInterface;
-        this.menuInterface = menuInterface;
     }
 
     @Override

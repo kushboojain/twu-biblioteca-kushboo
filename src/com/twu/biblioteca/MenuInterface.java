@@ -11,7 +11,7 @@ public class MenuInterface {
     LoginInterface loginInterface;
     LibrarianInterface librarianInterface;
     CustomerDetails customerLoggedIn = null;
-    Option[] availableOptions;
+    ArrayList<Option> availableOptions;
     LoginOption loginOption;
     ListBooksOption listBooksOption;
     ListMoviesOption listMoviesOption;
@@ -23,8 +23,8 @@ public class MenuInterface {
     LogOutOption logOutOption;
     ListCustomerDetailsOption listCustomerDetailsOption;
 
-    public MenuInterface(LibrarianInterface librarianInterface, UserInterface userInterface, ArrayList<CustomerDetails> customers) {
-        this.librarianInterface = librarianInterface;
+    public MenuInterface(LibrarianInterface libInterface, UserInterface userInterface, ArrayList<CustomerDetails> customers) {
+        this.librarianInterface = libInterface;
         this.userInterface = userInterface;
         this.loginInterface = new LoginInterface(userInterface,customers,this);
         loginOption = new LoginOption(this.loginInterface);
@@ -35,9 +35,9 @@ public class MenuInterface {
         checkoutMovieOption = new CheckoutMovieOption(librarianInterface);
         quitOption = new QuitOption();
         returnMovieOption = new ReturnMovieOption(librarianInterface);
-        logOutOption = new LogOutOption(userInterface,this);
-        listCustomerDetailsOption = new ListCustomerDetailsOption(userInterface, customerLoggedIn);
-        availableOptions = new Option[]{loginOption, listBooksOption, listMoviesOption, quitOption};
+        logOutOption = new LogOutOption(loginInterface);
+        listCustomerDetailsOption = new ListCustomerDetailsOption(this.loginInterface);
+        availableOptions = new ArrayList<Option>(Arrays.asList(listBooksOption, listMoviesOption, quitOption, loginOption));
     }
 
     public boolean isInvalidOption(String option) {
@@ -60,23 +60,27 @@ public class MenuInterface {
 
     void updateListAfterLogin() {
         if(customerLoggedIn != null) {
-            Arrays.asList(availableOptions).remove(loginOption);
-            Arrays.asList(availableOptions).add(logOutOption);
-            Arrays.asList(availableOptions).add(checkoutBookOption);
-            Arrays.asList(availableOptions).add(returnBookOption);
-            Arrays.asList(availableOptions).add(checkoutMovieOption);
-            Arrays.asList(availableOptions).add(returnMovieOption);
+            availableOptions.remove(loginOption);
+            availableOptions.add(checkoutBookOption);
+            availableOptions.add(returnBookOption);
+            availableOptions.add(checkoutMovieOption);
+            availableOptions.add(returnMovieOption);
+            availableOptions.add(listCustomerDetailsOption);
+            availableOptions.add(logOutOption);
+
         }
 
     }
     void updateListAfterLogout() {
         if(customerLoggedIn == null) {
-            Arrays.asList(availableOptions).add(loginOption);
-            Arrays.asList(availableOptions).remove(logOutOption);
-            Arrays.asList(availableOptions).remove(checkoutBookOption);
-            Arrays.asList(availableOptions).remove(returnBookOption);
-            Arrays.asList(availableOptions).remove(checkoutMovieOption);
-            Arrays.asList(availableOptions).remove(returnMovieOption);
+            availableOptions.remove(logOutOption);
+            availableOptions.remove(checkoutBookOption);
+            availableOptions.remove(returnBookOption);
+            availableOptions.remove(checkoutMovieOption);
+            availableOptions.remove(returnMovieOption);
+            availableOptions.remove(listCustomerDetailsOption);
+            availableOptions.add(loginOption);
+
         }
 
     }

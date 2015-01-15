@@ -10,6 +10,7 @@ public class LoginInterface {
     private UserInterface userInterface;
     private ArrayList<CustomerDetails> customers;
     private MenuInterface menuInterface;
+    private CustomerDetails loggedInCustomer;
 
     public LoginInterface(UserInterface userInterface, ArrayList<CustomerDetails> customers, MenuInterface menuInterface) {
         this.userInterface = userInterface;
@@ -18,7 +19,7 @@ public class LoginInterface {
     }
 
     public void signIn() {
-        CustomerDetails loggedInCustomer = performSignIn();
+        loggedInCustomer = performSignIn();
         menuInterface.setLoggedInCustomer(loggedInCustomer);
         userInterface.displaySignInStatus(getStatusOfLogin(loggedInCustomer));
         menuInterface.updateListAfterLogin();
@@ -44,5 +45,9 @@ public class LoginInterface {
         menuInterface.setLoggedInCustomer(null);
         userInterface.displaySignOutMessage();
         menuInterface.updateListAfterLogout();
+    }
+
+    public void listDetails() {
+        userInterface.displayCustomerDetails(loggedInCustomer.getDetails());
     }
 }
