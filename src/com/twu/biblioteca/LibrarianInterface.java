@@ -16,83 +16,73 @@ public class LibrarianInterface {
     }
 
     public void performCheckoutOfBook() {
-        printToUserInterface("Enetr a book name:\n");
-        String bookName = getInputFromUser();
-        String message = checkOutProcessOfBook(bookName);
-        printToUserInterface(message);
+        String bookName = userInterface.getBookNameFromUser();
+        boolean status = checkOutProcessOfBook(bookName);
+        userInterface.displayMessageOnCheckoutOfBook(status);
     }
 
-    String checkOutProcessOfBook(String bookName) {
+    boolean checkOutProcessOfBook(String bookName) {
         Book borrowed;
         if((borrowed = (Book) books.getItemForCheckout(bookName)) != null){
             books.checkoutItem(borrowed);
-            return ("Thank you! Enjoy the book\n");
+            return true;
 
         }
         else
-            return ("That book is not available\n");
+            return false;
     }
-
-    private String getInputFromUser() {
-        return userInterface.readUserInputForProcessing();
-    }
-
 
     public void performCheckinOfBook() {
-        printToUserInterface("Enter the name of the book to return");
-        String bookName = getInputFromUser();
-        printToUserInterface(checkInProcessOfBook(bookName));
+        String bookName = userInterface.getBookNameFromUser();
+        userInterface.displayMessageOnCheckinOfBook(checkInProcessOfBook(bookName));
     }
 
-    String checkInProcessOfBook(String bookName) {
+    boolean checkInProcessOfBook(String bookName) {
         Book returnedBook;
         if((returnedBook = (Book) books.getItemForCheckin(bookName)) != null) {
             books.checkinItem(returnedBook);
-            return ("Thank you for returning the book\n");
+            return true;
         }
         else
-            return ("That is not a valid book to return\n");
+            return false;
     }
 
-    private void printToUserInterface(String message) {
-        userInterface.print(message);
-    }
 
     public void listBooksDetails() {
         userInterface.displayBookDetails(books.getAvailableItemDetails());
     }
 
     public void performCheckinOfMovie() {
-        printToUserInterface("Enter the name of the movie to borrow:");
-        String movieName = getInputFromUser();
-        printToUserInterface(checkInProcessMovie(movieName));
+        String movieName = userInterface.getMovieNameFromUser();
+        userInterface.displayMessageOnCheckinOfMovie(checkInProcessMovie(movieName));
+
     }
     public void performCheckOutOfMovie() {
-        printToUserInterface("Enetr a movie name:\n");
-        String movieName = getInputFromUser();
-        String message = checkOutProcessOfMovie(movieName);
-        printToUserInterface(message);
+        String movieName = userInterface.getMovieNameFromUser();
+        boolean status = checkOutProcessOfMovie(movieName);
+        userInterface.displayMessageOnCheckoutOfMovie(status);
     }
 
-    String checkInProcessMovie(String movieName) {
+
+    boolean checkInProcessMovie(String movieName) {
         Movie returnedMovie;
         if((returnedMovie = (Movie) movies.getItemForCheckin(movieName)) != null) {
             movies.checkinItem(returnedMovie);
-            return ("Thank you for returning the movie\n");
+            return true;
         }
         else
-            return ("That is not a valid movie to return\n");
+            return false;
     }
 
-    String checkOutProcessOfMovie(String movieName) {
+    boolean checkOutProcessOfMovie(String movieName) {
         Movie borrowed;
         if((borrowed = (Movie) movies.getItemForCheckout(movieName)) != null){
             movies.checkoutItem(borrowed);
-            return ("Thank you! Enjoy the movie\n");
+            return true;
 
         }
         else
-            return ("That movie is not available\n");
+            return false;
 
     }
 

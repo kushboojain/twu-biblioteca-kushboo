@@ -42,4 +42,66 @@ public class UserInterface {
             print("\n");
         }
     }
+
+    public String getBookNameFromUser() {
+        print("Enter the name of the book: ");
+        return readUserInputForProcessing();
+    }
+    public String getMovieNameFromUser() {
+        print("Enter the name of the movie: ");
+        return readUserInputForProcessing();
+    }
+
+    public void displayMessageOnCheckoutOfMovie(boolean status) {
+        if(status)
+            print("Thank You! Enjoy the movie\n");
+        else
+            print("That movie is not available\n");
+    }
+
+    public void displayMessageOnCheckinOfMovie(boolean status) {
+        if(status)
+            print("Thank you for returning the movie\n");
+        else
+            print("That movie is not valid\n");
+
+    }
+
+    public void displayMessageOnCheckoutOfBook(boolean status) {
+        if(status)
+            print("Thank You! Enjoy the book\n");
+        else
+            print("That book is not available\n");
+    }
+
+    public void displayMessageOnCheckinOfBook(boolean status) {
+        if(status)
+            print("Thank you for returning the book\n");
+        else
+            print("That movie is not book\n");
+
+    }
+
+    public void printInvalidOption() {
+        print("Select a valid Option!\n");
+    }
+
+    public String signinNumber() {
+        print("Enter your library number");
+        return readUserInputForProcessing();
+    }
+    public String signinPassword() {
+        print("Enter your password");
+        return readUserInputForProcessing();
+    }
+    public void signOut() {
+        print("Bye");
+    }
+
+    public void displaySignInStatus(boolean status) {
+        if(status)
+            print("Sucesfully Logged in");
+        else
+            print("Wrong credentials");
+    }
 }

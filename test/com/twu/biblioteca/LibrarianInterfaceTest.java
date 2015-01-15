@@ -10,6 +10,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by khusbooj on 13/01/15.
@@ -47,58 +49,41 @@ public class LibrarianInterfaceTest {
     }
     @Test
     public void shouldCheckSuccessfulCheckoutMessage()  {
-        assertEquals("Thank you! Enjoy the book\n", librarianInterface.checkOutProcessOfBook("Sherlock Holmes"));
+        assertTrue(librarianInterface.checkOutProcessOfBook("Sherlock Holmes"));
     }
     @Test
     public void shouldCheckUnsuccessfulCheckoutMessage()  {
-        assertEquals("That book is not available\n", librarianInterface.checkOutProcessOfBook("Harry Potter"));
+        assertFalse(librarianInterface.checkOutProcessOfBook("Harry Potter"));
     }
 
-    @Test
-    public void shouldCheckForIncorrectMessageForSucceesfulCheckout()  {
-        assertThat(librarianInterface.checkOutProcessOfBook("Sherlock Holmes"), not("That book is not available\n"));
-    }
-    @Test
-    public void shouldCheckIncorrectMessageForUnsucessfulCheckout()  {
-        assertThat(librarianInterface.checkOutProcessOfBook("Harry"), not("Thank you! Enjoy the book\n"));
-    }
 
     @Test
     public void shouldCheckSuccessfulCheckinMessage()  {
         String bookName = "Terms & Conditions";
         librarianInterface.checkOutProcessOfBook(bookName);
-        assertThat(librarianInterface.checkInProcessOfBook(bookName), is("Thank you for returning the book\n"));
-    }
-    @Test
-    public void shouldCheckUnsuccessfulCheckinMessage()  {
-        assertThat(librarianInterface.checkInProcessOfBook("Harry Potter"), is("That is not a valid book to return\n"));
+        assertTrue(librarianInterface.checkInProcessOfBook(bookName));
     }
 
     @Test
-    public void shouldCheckForIncorrectMessageForSucceesfulCheckin()  {
-        librarianInterface.checkOutProcessOfBook("Sherlock Holmes");
-        assertThat(librarianInterface.checkInProcessOfBook("Sherlock Holmes"), not("That is not a valid book to return\n"));
-    }
-    @Test
-    public void shouldCheckIncorrectMessageForUnsucessfulCheckin()  {
-        assertThat(librarianInterface.checkInProcessOfBook("Harry"), not("Thank you! Enjoy the book\n"));
+    public void shouldCheckUnsucessfulCheckinStatus() {
+        assertFalse(librarianInterface.checkInProcessOfBook("Harry"));
     }
     @Test
     public void shouldCheckSuccessfulMessageOfCheckoutOfMovie() {
-        assertThat(librarianInterface.checkOutProcessOfMovie("Inception"), not("Thank You!, Enjoy the movie"));
+        assertTrue(librarianInterface.checkOutProcessOfMovie("Inception"));
+    }
+    @Test
+    public void shouldCheckUnuccessfulMessageOfCheckoutOfMovie() {
+        assertFalse(librarianInterface.checkOutProcessOfMovie("Harry"));
     }
     @Test
     public void shouldCheckSuccessfulMessageOfCheckinOfMovie() {
         String movieName = "Inception";
         librarianInterface.checkOutProcessOfMovie(movieName);
-        assertThat(librarianInterface.checkInProcessMovie(movieName), is("Thank you for returning the movie\n"));
+        assertTrue(librarianInterface.checkInProcessMovie(movieName));
     }
     @Test
-    public void shouldCheckUnsuccessfulCheckoutMessageOfMovie()  {
-        assertEquals("That movie is not available\n", librarianInterface.checkOutProcessOfMovie("Harry"));
-    }
-    @Test
-    public void shouldCheckUnsucessfulCheckinMessageOfMovie() {
-        assertEquals("That is not a valid movie to return\n", librarianInterface.checkInProcessMovie("Home Alone"));
+    public void shouldCheckUnsuccessfulCheckinMessageOfMovie()  {
+        assertFalse(librarianInterface.checkInProcessMovie("Harry"));
     }
 }

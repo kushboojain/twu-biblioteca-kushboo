@@ -5,7 +5,7 @@ package com.twu.biblioteca;
 public class QuitOption extends Option {
     @Override
     public void performedAction() {
-        return;
+
     }
 
     public QuitOption() {
