@@ -1,8 +1,7 @@
 package com.twu.biblioteca;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by khusbooj on 14/01/15.
@@ -95,7 +94,7 @@ public class UserInterface {
         return readUserInputForProcessing();
     }
     public void displaySignOutMessage() {
-        print("Bye");
+        print("Bye\n");
     }
 
     public void displaySignInStatus(boolean status) {
@@ -107,9 +106,36 @@ public class UserInterface {
 
     public void displayCustomerDetails(ArrayList<String> customerLoggedInDetails) {
         print("Your Details:\n");
-        for (String customerLoggedInDetail : customerLoggedInDetails) {
-            print(customerLoggedInDetail + "\n");
-        }
+        print("Name: " + customerLoggedInDetails.get(0) + "\n");
+        print("Email: " + customerLoggedInDetails.get(1) + "\n");
+        print("PhNo: " + customerLoggedInDetails.get(2) + "\n");
+    }
 
+    public void displayBorrowedBooks(HashMap<String, String> borrowedBooks) {
+        if(borrowedBooks.isEmpty()) {
+            print("No books are borrowed");
+        }else {
+            print("The borrowed books are (with customer number):\n");
+            Iterator it = borrowedBooks.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pairs = (Map.Entry) it.next();
+                print(pairs.getKey() + " : " + pairs.getValue());
+                it.remove();
+            }
+        }
+    }
+
+    public void displayBorrowedMovies(HashMap<String, String> borrowedMovies) {
+        if(borrowedMovies.isEmpty()) {
+            print("No movies are borrowed");
+        }else {
+            print("The borrowed movies are (with customer number):\n");
+            Iterator it = borrowedMovies.entrySet().iterator();
+            while (it.hasNext()) {
+                Map.Entry pairs = (Map.Entry)it.next();
+                print(pairs.getKey() + " : " + pairs.getValue());
+                it.remove();
+            }
+        }
     }
 }

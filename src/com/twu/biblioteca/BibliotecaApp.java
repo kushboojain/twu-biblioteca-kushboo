@@ -10,6 +10,7 @@ public class BibliotecaApp {
     private ArrayList<Item> movies;
     protected LibrarianInterface librarianInterface;
     MenuInterface menuInterface;
+    boolean stop = false;
     ArrayList<CustomerDetails> customers = new ArrayList<CustomerDetails>();
     public static void main(String[] args) throws IOException {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
@@ -27,7 +28,7 @@ public class BibliotecaApp {
          initializeBooks();
          initializeMovies();
          librarianInterface = new LibrarianInterface(new Library(books), new Library(movies), userInterface);
-         menuInterface = new MenuInterface(librarianInterface, userInterface, customers);
+         menuInterface = new MenuInterface(librarianInterface, userInterface, customers, this);
     }
 
     private void launch() throws IOException {
@@ -41,7 +42,7 @@ public class BibliotecaApp {
                 continue;
             }
             menuInterface.selectMenuOption(optionFromUser);
-        } while (!optionFromUser.equals("Quit"));
+        } while (!stop);
     }
 
     public  void initializeBooks() throws IOException {
@@ -64,5 +65,9 @@ public class BibliotecaApp {
             String attributes[] = movieDetails.split(",");
             movies.add(new Movie(attributes[0], attributes[1], attributes[2], attributes[3]));
         }
+    }
+
+    public void setStopStatus(boolean stopStatus) {
+        this.stop = stopStatus;
     }
 }

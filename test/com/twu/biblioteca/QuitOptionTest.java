@@ -2,6 +2,8 @@ package com.twu.biblioteca;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -10,6 +12,8 @@ import static org.junit.Assert.assertEquals;
 public class QuitOptionTest {
     @Test
     public void shouldCheckQuitOptionName() {
-        assertEquals(new QuitOption().getOptionName(), "Quit");
+        UserInterface userInterface = new UserInterface();
+        ArrayList<Item> items = new ArrayList<Item>();
+        assertEquals("Quit", new QuitOption(new MenuInterface(new LibrarianInterface(new Library(items), new Library(items), userInterface),userInterface,new ArrayList<CustomerDetails>(),new BibliotecaApp() )).getOptionName());
     }
 }

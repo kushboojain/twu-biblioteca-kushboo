@@ -8,6 +8,8 @@ import java.util.Arrays;
  */
 public class MenuInterface {
     UserInterface userInterface;
+    private final ArrayList<CustomerDetails> customers;
+    private final BibliotecaApp bibliotecaApp;
     LoginInterface loginInterface;
     LibrarianInterface librarianInterface;
     CustomerDetails customerLoggedIn = null;
@@ -22,18 +24,24 @@ public class MenuInterface {
     ReturnMovieOption returnMovieOption;
     LogOutOption logOutOption;
     ListCustomerDetailsOption listCustomerDetailsOption;
+    ListBooksBorrowedOption listBooksBorrowedOption;
+    ListMoviesBorrowedOption listMoviesBorrowedOption;
 
-    public MenuInterface(LibrarianInterface libInterface, UserInterface userInterface, ArrayList<CustomerDetails> customers) {
+    public MenuInterface(LibrarianInterface libInterface, UserInterface userInterface, ArrayList<CustomerDetails> customers, BibliotecaApp bibliotecaApp) {
         this.librarianInterface = libInterface;
         this.userInterface = userInterface;
-        this.loginInterface = new LoginInterface(userInterface,customers,this);
+        this.customers = customers;
+        this.bibliotecaApp = bibliotecaApp;
+        this.loginInterface = new LoginInterface(userInterface, this.customers, this);
         loginOption = new LoginOption(this.loginInterface);
         listBooksOption = new ListBooksOption(librarianInterface);
         listMoviesOption = new ListMoviesOption(librarianInterface);
         checkoutBookOption = new CheckoutBookOption(librarianInterface);
         returnBookOption = new ReturnBookOption(librarianInterface);
         checkoutMovieOption = new CheckoutMovieOption(librarianInterface);
-        quitOption = new QuitOption();
+        listBooksBorrowedOption = new ListBooksBorrowedOption(librarianInterface);
+        listMoviesBorrowedOption = new ListMoviesBorrowedOption(librarianInterface);
+        quitOption = new QuitOption(this);
         returnMovieOption = new ReturnMovieOption(librarianInterface);
         logOutOption = new LogOutOption(loginInterface);
         listCustomerDetailsOption = new ListCustomerDetailsOption(this.loginInterface);
@@ -66,6 +74,8 @@ public class MenuInterface {
             availableOptions.add(checkoutMovieOption);
             availableOptions.add(returnMovieOption);
             availableOptions.add(listCustomerDetailsOption);
+            availableOptions.add(listBooksBorrowedOption);
+            availableOptions.add(listMoviesBorrowedOption);
             availableOptions.add(logOutOption);
 
         }
@@ -78,6 +88,8 @@ public class MenuInterface {
             availableOptions.remove(returnBookOption);
             availableOptions.remove(checkoutMovieOption);
             availableOptions.remove(returnMovieOption);
+            availableOptions.remove(listBooksBorrowedOption);
+            availableOptions.remove(listMoviesBorrowedOption);
             availableOptions.remove(listCustomerDetailsOption);
             availableOptions.add(loginOption);
 
@@ -96,5 +108,10 @@ public class MenuInterface {
 
     public void setLoggedInCustomer(CustomerDetails loggedInCustomer) {
         customerLoggedIn = loggedInCustomer;
+        librarianInterface.setLoggedInCustomer(customerLoggedIn);
+    }
+
+    public void stopApp() {
+        bibliotecaApp.setStopStatus(true);
     }
 }

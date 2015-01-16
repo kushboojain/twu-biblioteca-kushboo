@@ -8,6 +8,7 @@ public class LibrarianInterface {
     Library books;
     Library movies;
     UserInterface userInterface;
+    private CustomerDetails loggedInCustomer;
 
     public LibrarianInterface(Library books, Library movies, UserInterface userInterface)  {
         this.books = books;
@@ -19,7 +20,11 @@ public class LibrarianInterface {
         String bookName = userInterface.getBookNameFromUser();
         boolean status = checkOutProcessOfBook(bookName);
         userInterface.displayMessageOnCheckoutOfBook(status);
+        if(status) {
+            books.putEntry(bookName, loggedInCustomer.getLibraryNumber());
+        }
     }
+
 
     boolean checkOutProcessOfBook(String bookName) {
         Book borrowed;
@@ -34,7 +39,11 @@ public class LibrarianInterface {
 
     public void performCheckinOfBook() {
         String bookName = userInterface.getBookNameFromUser();
-        userInterface.displayMessageOnCheckinOfBook(checkInProcessOfBook(bookName));
+        boolean status = checkInProcessOfBook(bookName);
+        userInterface.displayMessageOnCheckinOfBook(status);
+        if(status) {
+            books.removeEntry(bookName);
+        }
     }
 
     boolean checkInProcessOfBook(String bookName) {
@@ -47,20 +56,19 @@ public class LibrarianInterface {
             return false;
     }
 
-
-    public void listBooksDetails() {
-        userInterface.displayBookDetails(books.getAvailableItemDetails());
-    }
-
     public void performCheckinOfMovie() {
         String movieName = userInterface.getMovieNameFromUser();
-        userInterface.displayMessageOnCheckinOfMovie(checkInProcessMovie(movieName));
-
+        boolean status = checkInProcessMovie(movieName);
+        userInterface.displayMessageOnCheckinOfMovie(status);
+        if(status)
+            movies.removeEntry(movieName);
     }
     public void performCheckOutOfMovie() {
         String movieName = userInterface.getMovieNameFromUser();
         boolean status = checkOutProcessOfMovie(movieName);
         userInterface.displayMessageOnCheckoutOfMovie(status);
+        if(status)
+            movies.putEntry(movieName,loggedInCustomer.getLibraryNumber());
     }
 
 
@@ -85,20 +93,23 @@ public class LibrarianInterface {
             return false;
 
     }
-    void makeEntryOfBorrowingBook() {
-
-    }
-    void removeEntryOfBorrowedBook() {
-
-    }
-    void makeEntryOfBorrowingMovie() {
-
-    }
-    void removeEntryOfBorrowedMovie() {
-
+    public void listBooksDetails() {
+        userInterface.displayBookDetails(books.getAvailableItemDetails());
     }
 
     public void listMoviesDetails() {
         userInterface.displayBookDetails(movies.getAvailableItemDetails());
+    }
+
+    public void listBorrowedBooks() {
+        userInterface.displayBorrowedBooks(books.getBorrowedItems());
+    }
+
+    public void listBorrowedMovies() {
+        userInterface.displayBorrowedMovies(movies.getBorrowedItems());
+    }
+
+    public void setLoggedInCustomer(CustomerDetails loggedInCustomer) {
+        this.loggedInCustomer = loggedInCustomer;
     }
 }

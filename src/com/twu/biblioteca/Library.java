@@ -8,7 +8,7 @@ import java.util.*;
 public class Library {
     ArrayList<Item> availableItems = new ArrayList<Item>();
     ArrayList<Item> borrowedItems = new ArrayList<Item>();
-    HashMap<Integer, String> rentalRecords = new HashMap<Integer, String>();
+    HashMap<String, String> rentalRecords = new HashMap<String, String>();
 
 
     public ArrayList<ArrayList<String>> getAvailableItemDetails() {
@@ -54,5 +54,17 @@ public class Library {
             }
         }
         return null;
+    }
+
+    public HashMap<String, String> getBorrowedItems() {
+        return rentalRecords;
+    }
+
+    public void putEntry(String itemName, String loggedInCustomer) {
+        rentalRecords.put(itemName, loggedInCustomer);
+    }
+
+    public void removeEntry(String bookName) {
+        rentalRecords.remove(bookName);
     }
 }

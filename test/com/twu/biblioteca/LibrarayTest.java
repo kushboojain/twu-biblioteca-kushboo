@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Created by khusbooj on 13/01/15.
@@ -68,6 +70,20 @@ public class LibrarayTest {
         biblioteca.checkoutItem(borrowedBook);
         assertNull(biblioteca.getItemForCheckout(borrowedBook.getName()));
     }
+    @Test
+    public void shouldCheckPutEntryOfItem() {
+        Book borrowedBook = (Book) books.get(0);
+        biblioteca.putEntry(borrowedBook.getName(),"Henry");
+        assertTrue(biblioteca.getBorrowedItems().containsKey(borrowedBook.getName()));
+    }
+    @Test
+    public void shouldCheckRemoveEntryOfItem() {
+        Book borrowedBook = (Book) books.get(0);
+        biblioteca.putEntry(borrowedBook.getName(),"Henry");
+        biblioteca.removeEntry(borrowedBook.getName());
+        assertFalse(biblioteca.getBorrowedItems().containsKey(borrowedBook.getName()));
+    }
+
 
 
 }
