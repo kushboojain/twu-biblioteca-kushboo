@@ -25,15 +25,20 @@ public class LoginInterface {
         menuInterface.updateListAfterLogin();
     }
 
-    CustomerDetails performSignIn() {
+    private CustomerDetails performSignIn() {
         String number = userInterface.signinNumber();
         String password = userInterface.signinPassword();
+        return getCustomerDetails(number, password);
+    }
+
+    private CustomerDetails getCustomerDetails(String number, String password) {
         for (CustomerDetails customer : customers) {
             if(customer.getLibraryNumber().equals(number) && customer.getPassword().equals(password))
                 return customer;
         }
         return null;
     }
+
     boolean getStatusOfLogin(CustomerDetails loggedInCustomer) {
         if(loggedInCustomer != null)
             return true;
@@ -42,6 +47,7 @@ public class LoginInterface {
     }
 
     public void signOut() {
+        loggedInCustomer = null;
         menuInterface.setLoggedInCustomer(null);
         userInterface.displaySignOutMessage();
         menuInterface.updateListAfterLogout();
