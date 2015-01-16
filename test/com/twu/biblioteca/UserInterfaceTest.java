@@ -28,7 +28,7 @@ public class UserInterfaceTest {
     @Test
     public void shouldCheckWelcomeMessgae()  {
         new UserInterface().displayWelcomeMessage();
-        assertEquals("Welcome to Biblioteca", outContent.toString());
+        assertEquals("Welcome to Biblioteca\n", outContent.toString());
     }
 
     @Test

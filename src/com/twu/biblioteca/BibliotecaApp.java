@@ -16,7 +16,6 @@ public class BibliotecaApp {
         bibliotecaApp.setInterfaces();
         bibliotecaApp.setCustomerDetails();
         bibliotecaApp.launch();
-
     }
 
     private void setCustomerDetails() {
@@ -29,8 +28,6 @@ public class BibliotecaApp {
          initializeMovies();
          librarianInterface = new LibrarianInterface(new Library(books), new Library(movies), userInterface);
          menuInterface = new MenuInterface(librarianInterface, userInterface, customers);
-
-
     }
 
     private void launch() throws IOException {

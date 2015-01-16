@@ -13,40 +13,5 @@ import static org.junit.Assert.assertTrue;
  */
 public class MenuInterfaceTest {
 
-//    MenuInterface menuInterface = new MenuInterface(new LibrarianInterface(new Library(new ArrayList<Item>()),new Library(new ArrayList<Item>()),new UserInterface()), new LoginInterface(new UserInterface()));
-//
-//
-//
-//    @Test
-//    public void shouldCheckTrueForInvalidOption()  {
-//        assertTrue(menuInterface.isInvalidOption("Books"));
-//    }
-//
-//    @Test
-//    public void shouldCheckValidOptionListBooks() {
-//        assertFalse(menuInterface.isInvalidOption("ListBooks"));
-//    }
-//    @Test
-//    public void shouldCheckValidOptionCheckoutBook() {
-//        assertEquals(menuInterface.isInvalidOption("Checkout Book"), false);
-//    }
-//    @Test
-//    public void shouldCheckValidOptionCheckinBook() {
-//        assertEquals(menuInterface.isInvalidOption("Return Book"), false);
-//    }
-//    @Test
-//    public void shouldCheckValidOptionQuit() {
-//        assertEquals(menuInterface.isInvalidOption("Quit"), false);
-//    }
-//
-//    @Test
-//    public void shouldCheckValidOptionCheckinMovie() {
-//        assertEquals(menuInterface.isInvalidOption("Return Movie"), false);
-//    }
-//
-//    @Test
-//    public void shouldCheckValidOptionCheckoutMovie() {
-//        assertEquals(menuInterface.isInvalidOption("Checkout Movie"), false);
-//    }
-//
+
 }

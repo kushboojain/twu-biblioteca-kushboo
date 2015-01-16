@@ -8,7 +8,8 @@ import java.util.*;
 public class Library {
     ArrayList<Item> availableItems = new ArrayList<Item>();
     ArrayList<Item> borrowedItems = new ArrayList<Item>();
-    RentalDetails accounts = new RentalDetails();
+    HashMap<Integer, String> rentalRecords = new HashMap<Integer, String>();
+
 
     public ArrayList<ArrayList<String>> getAvailableItemDetails() {
         ArrayList<ArrayList<String>> detailsOfItems = new ArrayList<ArrayList<String>>();

@@ -6,7 +6,7 @@ package com.twu.biblioteca;
 public class LibrarianInterface {
 
     Library books;
-    private Library movies;
+    Library movies;
     UserInterface userInterface;
 
     public LibrarianInterface(Library books, Library movies, UserInterface userInterface)  {
@@ -83,6 +83,18 @@ public class LibrarianInterface {
         }
         else
             return false;
+
+    }
+    void makeEntryOfBorrowingBook() {
+
+    }
+    void removeEntryOfBorrowedBook() {
+
+    }
+    void makeEntryOfBorrowingMovie() {
+
+    }
+    void removeEntryOfBorrowedMovie() {
 
     }
 

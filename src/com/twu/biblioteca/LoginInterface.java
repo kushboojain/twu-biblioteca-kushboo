@@ -25,7 +25,7 @@ public class LoginInterface {
         menuInterface.updateListAfterLogin();
     }
 
-    private CustomerDetails performSignIn() {
+    CustomerDetails performSignIn() {
         String number = userInterface.signinNumber();
         String password = userInterface.signinPassword();
         for (CustomerDetails customer : customers) {
