@@ -32,13 +32,6 @@ public class Customer {
         else
             return false;
     }
-    public ArrayList<String> getDetails() {
-        ArrayList<String> details = new ArrayList<String>();
-        details.add(name);
-        details.add(email);
-        details.add(phNo);
-        return details;
-    }
 
     public String getPhno() {
         return phNo;
