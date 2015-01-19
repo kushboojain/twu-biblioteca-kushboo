@@ -4,8 +4,8 @@ package com.twu.biblioteca;
  * Created by khusbooj on 19/01/15.
  */
 public class RentalDetailInterface {
-    String itemName;
-    String userNumber;
+    private String itemName;
+    private String userNumber;
 
     public RentalDetailInterface(String itemName, String userNumber) {
         this.itemName = itemName;

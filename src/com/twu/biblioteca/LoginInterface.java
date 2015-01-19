@@ -20,7 +20,7 @@ public class LoginInterface {
 
     public void signIn() {
         loggedInCustomer = performSignIn();
-        menuInterface.libraryInterface.setLoggedInCustomer(loggedInCustomer);
+        menuInterface.setLoggedInCustomer(loggedInCustomer);
         userInterface.displaySignInStatus(getStatusOfLogin(loggedInCustomer));
         menuInterface.updateListAfterLogin(loggedInCustomer);
     }
@@ -55,7 +55,7 @@ public class LoginInterface {
 
     public void signOut() {
         loggedInCustomer = null;
-        menuInterface.libraryInterface.setLoggedInCustomer(null);
+        menuInterface.setLoggedInCustomer(null);
         userInterface.displaySignOutMessage();
         menuInterface.updateListAfterLogout(null);
     }

@@ -27,6 +27,7 @@ public class MenuInterface {
     void updateListAfterLogin(Customer customerLoggedIn) {
         if(customerLoggedIn != null) {
             menu.clear();
+
             menu.add(new ListBooksOption(libraryInterface));
             menu.add(new ListMoviesOption(libraryInterface));
             menu.add(new QuitOption(this));
@@ -60,5 +61,9 @@ public class MenuInterface {
 
     public void stopApp() {
         bibliotecaApp.setStopStatus(true);
+    }
+
+    public void setLoggedInCustomer(Customer loggedInCustomer) {
+        libraryInterface.setLoggedInCustomer(loggedInCustomer);
     }
 }
