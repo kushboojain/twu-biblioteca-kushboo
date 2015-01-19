@@ -5,11 +5,9 @@ package com.twu.biblioteca;
  */
 public abstract class Option {
     String name;
-    public abstract void performedAction();
+    public abstract void execute();
 
-    protected abstract String setOptionName();
+    protected abstract String getOptionName();
 
-    public String getOptionName() {
-        return name;
-    }
+
 }

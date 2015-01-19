@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 public class MenuInterfaceTest {
     private UserInterface userInterface = new UserInterface();
     private ArrayList<Item> items = new ArrayList<Item>();
-    MenuInterface menuInterface = new MenuInterface(new LibrarianInterface(new Library(items), new Library(items), userInterface),userInterface,new ArrayList<CustomerDetails>(),new BibliotecaApp());
+    MenuInterface menuInterface = new MenuInterface(new LibraryInterface(new Library(items), new Library(items), userInterface),userInterface,new ArrayList<Customer>(),new BibliotecaApp());
     ArrayList<String> optionsBeforeLogin;
     ArrayList<String> optionsAfterLogin;
     @Before
@@ -26,46 +26,33 @@ public class MenuInterfaceTest {
     }
     @Test
     public void shouldCheckValidOptionsBeforeLogin() {
-        ArrayList<String> expectedOptions = menuInterface.getOptionsList();
-        for (String option : optionsBeforeLogin) {
-            assertTrue(expectedOptions.contains(option));
+        ArrayList<Option> expectedOptions = menuInterface.getOptionsList();
+        for (int i = 0, optionsAfterLoginSize = optionsBeforeLogin.size(); i < optionsAfterLoginSize; i++) {
+            String option = optionsBeforeLogin.get(i);
+            assertEquals(option, expectedOptions.get(i).getOptionName());
         }
+
     }
 
     @Test
     public void shouldCheclValidOptionsAfterLogin() {
-        menuInterface.setLoggedInCustomer(new CustomerDetails("123-6789", "dwfr", "hen", "234@jr.com", "34264"));
-        menuInterface.updateListAfterLogin();
-        ArrayList<String> optionsList = menuInterface.getOptionsList();
+        menuInterface.updateListAfterLogin(new Customer("123-6789", "dwfr", "hen", "234@jr.com", "34264"));
+        ArrayList<Option> optionsList = menuInterface.getOptionsList();
         for (int i = 0, optionsAfterLoginSize = optionsAfterLogin.size(); i < optionsAfterLoginSize; i++) {
             String option = optionsAfterLogin.get(i);
-            assertEquals(option, optionsList.get(i));
+            assertEquals(option, optionsList.get(i).getOptionName());
         }
 
     }
     @Test
     public void shouldCheckValidOptionsAfterLogout() {
-        menuInterface.updateListAfterLogout();
-        ArrayList<String> expectedOptions = menuInterface.getOptionsList();
-        for (String option : optionsBeforeLogin) {
-            assertTrue(expectedOptions.contains(option));
+        menuInterface.updateListAfterLogout(null);
+        ArrayList<Option> expectedOptions = menuInterface.getOptionsList();
+        for (int i = 0, optionsAfterLoginSize = optionsBeforeLogin.size(); i < optionsAfterLoginSize; i++) {
+            String option = optionsBeforeLogin.get(i);
+            assertEquals(option, expectedOptions.get(i).getOptionName());
         }
 
     }
-    @Test
-    public void shouldCheckValidOptionBeforeLogin() {
-        assertFalse(menuInterface.isInvalidOption("SignIn"));
-    }
-    @Test
-    public void shouldCheckInvalidOptionBeforeLogin() {
-        assertTrue(menuInterface.isInvalidOption("Sign In"));
-    }
-    @Test
-    public void shouldCheckValidOptionAfterLogout() {
-        assertFalse(menuInterface.isInvalidOption("SignIn"));
-    }
-    @Test
-    public void shouldCheckInalidOptionAfterLogout() {
-        assertTrue(menuInterface.isInvalidOption("Sign In"));
-    }
+
 }

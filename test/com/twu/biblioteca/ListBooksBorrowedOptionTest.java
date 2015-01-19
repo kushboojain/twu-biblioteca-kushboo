@@ -12,6 +12,6 @@ import static org.junit.Assert.assertEquals;
 public class ListBooksBorrowedOptionTest {
     @Test
     public void shouldCheckOptionName() {
-        assertEquals(new ListBooksBorrowedOption(new LibrarianInterface(new Library(new ArrayList<Item>()), new Library(new ArrayList<Item>()),new UserInterface())).getOptionName(), "List Borrowed Books");
+        assertEquals(new ListBooksBorrowedOption(new LibraryInterface(new Library(new ArrayList<Item>()), new Library(new ArrayList<Item>()),new UserInterface())).getOptionName(), "List Borrowed Books");
     }
 }

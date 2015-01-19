@@ -25,21 +25,18 @@ public class UserInterface {
         print("Welcome to Biblioteca\n");
     }
 
-    public void displayMenu(ArrayList<String> options) {
+    public void displayMenu(ArrayList<Option> options) {
         print("\nChoose from a option below:\n");
-        for (String option : options) {
-            print(option + "\n");
+        for (Option option : options) {
+            print(option.getOptionName() + "\n");
         }
 
     }
 
-    public void displayBookDetails(ArrayList<ArrayList<String>> detailsOfBooks) {
-        for (ArrayList<String> detail : detailsOfBooks) {
-            for (String bookParameter : detail) {
-                print(bookParameter + "\t\t");
-            }
-            print("\n");
-        }
+    public void displayBookDetails(Book book) {
+        print("Name: "+ book.getName() + "\t\t\t");
+        print("Author: "+ book.getAuthor() + "\t\t\t");
+        print("Year: " + book.getYear() + "\n");
     }
 
     public String getBookNameFromUser() {
@@ -104,11 +101,11 @@ public class UserInterface {
             print("Wrong credentials!\n");
     }
 
-    public void displayCustomerDetails(ArrayList<String> customerLoggedInDetails) {
+    public void displayCustomerDetails(Customer customerLoggedInDetails) {
         print("Your Details:\n");
-        print("Name: " + customerLoggedInDetails.get(0) + "\n");
-        print("Email: " + customerLoggedInDetails.get(1) + "\n");
-        print("PhNo: " + customerLoggedInDetails.get(2) + "\n");
+        print("Name: " + customerLoggedInDetails.getName() + "\n");
+        print("Email: " + customerLoggedInDetails.getEmail() + "\n");
+        print("PhNo: " + customerLoggedInDetails.getPhno() + "\n");
     }
 
     public void displayBorrowedBooks(HashMap<String, String> borrowedBooks) {
@@ -137,5 +134,12 @@ public class UserInterface {
                 it.remove();
             }
         }
+    }
+
+    public void displayMovieDetails(Movie availableMovieDetail) {
+        print("Name: " + availableMovieDetail.getName() + "\t\t\t");
+        print("Director: " + availableMovieDetail.getDirectorName() + "\t\t\t");
+        print("Year: " + availableMovieDetail.getYear() + "\t\t\t");
+        print("Rating: " + availableMovieDetail.getRating() + "\n");
     }
 }

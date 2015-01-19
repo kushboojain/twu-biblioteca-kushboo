@@ -1,31 +1,30 @@
 package com.twu.biblioteca;
 
-import java.util.ArrayList;
-
 /**
  * Created by khusbooj on 15/01/15.
  */
 public class Movie extends Item {
     String year;
     String rating;
-    String director;
+    String directorName;
 
-    public Movie(String movieName, String director, String year, String rating) {
+    public Movie(String movieName, String directorName, String year, String rating) {
 
         this.name = movieName;
-        this.director = director;
+        this.directorName = directorName;
         this.year = year;
         this.rating = rating;
     }
 
+    public String getYear() {
+        return year;
+    }
 
-    @Override
-    public ArrayList<String> details() {
-        ArrayList<String> detail = new ArrayList<String>();
-        detail.add(name);
-        detail.add(director);
-        detail.add(year);
-        detail.add(rating);
-        return detail;
+    public String getRating() {
+        return rating;
+    }
+
+    public String getDirectorName() {
+        return directorName;
     }
 }

@@ -8,44 +8,61 @@ public class BibliotecaApp {
     private  ArrayList<Item> books;
     UserInterface userInterface = new UserInterface();
     private ArrayList<Item> movies;
-    protected LibrarianInterface librarianInterface;
+    protected LibraryInterface libraryInterface;
     MenuInterface menuInterface;
     boolean stop = false;
-    ArrayList<CustomerDetails> customers = new ArrayList<CustomerDetails>();
+    ArrayList<Customer> customers = new ArrayList<Customer>();
+    private ArrayList<Option> availableOptions;
+
     public static void main(String[] args) throws IOException {
         BibliotecaApp bibliotecaApp = new BibliotecaApp();
-        bibliotecaApp.setInterfaces();
-        bibliotecaApp.setCustomerDetails();
+        bibliotecaApp.initialize();
         bibliotecaApp.launch();
     }
 
-    private void setCustomerDetails() {
-        customers.add(new CustomerDetails("123-4567", "qwerty", "Henry", "hj@gm.com", "21367"));
-        customers.add(new CustomerDetails("234-8679", "xyz", "Rohit", "rf@yh.com", "346789"));
+    private void initializeCustomers() {
+        customers.add(new Customer("123-4567", "qwerty", "Henry", "hj@gm.com", "21367"));
+        customers.add(new Customer("234-8679", "xyz", "Rohit", "rf@yh.com", "346789"));
     }
 
-    void setInterfaces() throws IOException {
+    private void initialize() throws IOException {
          initializeBooks();
          initializeMovies();
-         librarianInterface = new LibrarianInterface(new Library(books), new Library(movies), userInterface);
-         menuInterface = new MenuInterface(librarianInterface, userInterface, customers, this);
+         initializeCustomers();
+         libraryInterface = new LibraryInterface(new Library(books), new Library(movies), userInterface);
+         menuInterface = new MenuInterface(libraryInterface, userInterface, customers, this);
     }
 
     private void launch() throws IOException {
         userInterface.displayWelcomeMessage();
         String optionFromUser;
         do {
-            userInterface.displayMenu(menuInterface.getOptionsList());
-            optionFromUser = userInterface.readUserInputForProcessing();
-            if(menuInterface.isInvalidOption(optionFromUser)) {
+            optionFromUser = getOptionName();
+            if(!selectMenuOption(optionFromUser)) {
                 userInterface.printInvalidOption();
-                continue;
             }
-            menuInterface.selectMenuOption(optionFromUser);
         } while (!stop);
     }
 
-    public  void initializeBooks() throws IOException {
+    private String getOptionName() {
+        String optionFromUser;
+        availableOptions = menuInterface.getOptionsList();
+        userInterface.displayMenu(availableOptions);
+        optionFromUser = userInterface.readUserInputForProcessing();
+        return optionFromUser;
+    }
+
+    boolean selectMenuOption(String optionFromUser) {
+        for (Option availableOption : availableOptions) {
+            if(availableOption.getOptionName().equals(optionFromUser)){
+                availableOption.execute();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private  void initializeBooks() throws IOException {
         books = new ArrayList<Item>();
         FileReader fileReader = new FileReader(new File("src/com/twu/biblioteca/Books"));
         String bookDetails;
@@ -56,7 +73,7 @@ public class BibliotecaApp {
         }
     }
 
-    public void initializeMovies() throws IOException {
+    private void initializeMovies() throws IOException {
         movies = new ArrayList<Item>();
         FileReader fileReader = new FileReader(new File("src/com/twu/biblioteca/Movies"));
         String movieDetails;

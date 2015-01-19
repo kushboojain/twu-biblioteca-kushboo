@@ -11,13 +11,8 @@ public class Library {
     HashMap<String, String> rentalRecords = new HashMap<String, String>();
 
 
-    public ArrayList<ArrayList<String>> getAvailableItemDetails() {
-        ArrayList<ArrayList<String>> detailsOfItems = new ArrayList<ArrayList<String>>();
-        for (Item item : availableItems) {
-            detailsOfItems.add(item.details());
-        }
-
-        return detailsOfItems;
+    public ArrayList<Item> getAvailableItemDetails() {
+        return availableItems;
     }
 
     public Library(ArrayList<Item> items)  {

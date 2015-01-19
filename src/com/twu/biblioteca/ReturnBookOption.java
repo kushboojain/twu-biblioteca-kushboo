@@ -4,21 +4,21 @@ package com.twu.biblioteca;
  * Created by khusbooj on 14/01/15.
  */
 public class ReturnBookOption extends Option {
-    LibrarianInterface librarianInterfaceInterface;
+    LibraryInterface libraryInterfaceInterface;
 
 
-    public ReturnBookOption(LibrarianInterface librarianInterfaceInterface) {
-        name = setOptionName();
-        this.librarianInterfaceInterface = librarianInterfaceInterface;
+    public ReturnBookOption(LibraryInterface libraryInterfaceInterface) {
+        name = getOptionName();
+        this.libraryInterfaceInterface = libraryInterfaceInterface;
     }
     @Override
-    public void performedAction() {
-        librarianInterfaceInterface.performCheckinOfBook();
+    public void execute() {
+        libraryInterfaceInterface.performCheckinOfBook();
     }
 
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "Return Book";
 
     }

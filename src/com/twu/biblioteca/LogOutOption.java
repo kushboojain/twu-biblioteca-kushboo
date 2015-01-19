@@ -8,17 +8,17 @@ public class LogOutOption extends Option {
 
     public LogOutOption(LoginInterface loginInterface) {
         this.loginInterface = loginInterface;
-        name = setOptionName();
+        name = getOptionName();
 
     }
 
     @Override
-    public void performedAction() {
+    public void execute() {
         loginInterface.signOut();
     }
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "Sign out";
     }
 }

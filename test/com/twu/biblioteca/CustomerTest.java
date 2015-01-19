@@ -10,8 +10,8 @@ import static org.junit.Assert.assertNotNull;
 /**
  * Created by khusbooj on 15/01/15.
  */
-public class CustomerDetailsTest {
-    CustomerDetails customer = new CustomerDetails("123-4567", "xyz", "Kushboo","kush@gm.com", "23463");
+public class CustomerTest {
+    Customer customer = new Customer("123-4567", "xyz", "Kushboo","kush@gm.com", "23463");
     String[] details = {"Kushboo","kush@gm.com", "23463"};
 
     @Test

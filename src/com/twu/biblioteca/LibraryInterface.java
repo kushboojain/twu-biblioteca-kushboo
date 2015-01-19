@@ -1,16 +1,18 @@
 package com.twu.biblioteca;
 
+import java.util.ArrayList;
+
 /**
  * Created by khusbooj on 13/01/15.
  */
-public class LibrarianInterface {
+public class LibraryInterface {
 
     Library books;
     Library movies;
     UserInterface userInterface;
-    private CustomerDetails loggedInCustomer;
+    private Customer loggedInCustomer;
 
-    public LibrarianInterface(Library books, Library movies, UserInterface userInterface)  {
+    public LibraryInterface(Library books, Library movies, UserInterface userInterface)  {
         this.books = books;
         this.movies = movies;
         this.userInterface = userInterface;
@@ -94,11 +96,17 @@ public class LibrarianInterface {
 
     }
     public void listBooksDetails() {
-        userInterface.displayBookDetails(books.getAvailableItemDetails());
+        ArrayList<Item> availableItemDetails = books.getAvailableItemDetails();
+        for (Item availableItemDetail : availableItemDetails) {
+            userInterface.displayBookDetails((Book) availableItemDetail);
+        }
     }
 
     public void listMoviesDetails() {
-        userInterface.displayBookDetails(movies.getAvailableItemDetails());
+        ArrayList<Item> availableMovieDetails = movies.getAvailableItemDetails();
+        for (Item availableMovieDetail : availableMovieDetails) {
+            userInterface.displayMovieDetails((Movie)availableMovieDetail);
+        }
     }
 
     public void listBorrowedBooks() {
@@ -109,7 +117,7 @@ public class LibrarianInterface {
         userInterface.displayBorrowedMovies(movies.getBorrowedItems());
     }
 
-    public void setLoggedInCustomer(CustomerDetails loggedInCustomer) {
+    public void setLoggedInCustomer(Customer loggedInCustomer) {
         this.loggedInCustomer = loggedInCustomer;
     }
 }

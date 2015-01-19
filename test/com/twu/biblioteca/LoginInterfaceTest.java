@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,15 +14,15 @@ import static org.junit.Assert.assertTrue;
 public class LoginInterfaceTest {
     private UserInterface userInterface = new UserInterface();
     private ArrayList<Item> items = new ArrayList<Item>();
-    ArrayList<CustomerDetails> customers = new ArrayList<CustomerDetails>();
+    ArrayList<Customer> customers = new ArrayList<Customer>();
     LoginInterface loginInterface;
-    CustomerDetails customer = new CustomerDetails("123-4567", "qwerty", "Henry", "hj@gm.com", "21367");
+    Customer customer = new Customer("123-4567", "qwerty", "Henry", "hj@gm.com", "21367");
 
     @Before
     public void initialize() {
 
         customers.add(customer);
-        loginInterface = new LoginInterface(userInterface, customers, new MenuInterface(new LibrarianInterface(new Library(items), new Library(items), userInterface),userInterface,new ArrayList<CustomerDetails>(),new BibliotecaApp()));
+        loginInterface = new LoginInterface(userInterface, customers, new MenuInterface(new LibraryInterface(new Library(items), new Library(items), userInterface),userInterface,new ArrayList<Customer>(),new BibliotecaApp()));
     }
     @Test
     public void shouldCheckStatusOfLoginForSuccessfulLogin() {

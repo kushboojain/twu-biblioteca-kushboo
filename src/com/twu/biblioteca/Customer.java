@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by khusbooj on 15/01/15.
  */
-public class CustomerDetails {
+public class Customer {
 
     private String libraryNumber;
     private String password;
@@ -14,7 +14,7 @@ public class CustomerDetails {
     private final String email;
     private final String phNo;
 
-    public CustomerDetails(String libraryNumber, String password, String name, String email, String phNo) {
+    public Customer(String libraryNumber, String password, String name, String email, String phNo) {
         this.libraryNumber = libraryNumber;
         this.password = password;
         this.name = name;
@@ -26,15 +26,29 @@ public class CustomerDetails {
         return libraryNumber;
     }
 
-    public String getPassword() {
-        return password;
+    boolean checkValidPassword(String inputPassword) {
+        if(password.equals(inputPassword))
+            return true;
+        else
+            return false;
     }
-
     public ArrayList<String> getDetails() {
         ArrayList<String> details = new ArrayList<String>();
         details.add(name);
         details.add(email);
         details.add(phNo);
         return details;
+    }
+
+    public String getPhno() {
+        return phNo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
     }
 }

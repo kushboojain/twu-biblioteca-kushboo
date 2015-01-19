@@ -4,20 +4,20 @@ package com.twu.biblioteca;
  * Created by khusbooj on 14/01/15.
  */
 public class CheckoutBookOption extends Option {
-    private final LibrarianInterface interfaceLibrarianInterface;
+    private final LibraryInterface libraryInterface;
 
     @Override
-    public void performedAction() {
-        interfaceLibrarianInterface.performCheckoutOfBook();
+    public void execute() {
+        libraryInterface.performCheckoutOfBook();
     }
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "Checkout Book";
     }
 
-    public CheckoutBookOption(LibrarianInterface interfaceLibrarianInterface) {
-        this.interfaceLibrarianInterface = interfaceLibrarianInterface;
-        name = setOptionName();
+    public CheckoutBookOption(LibraryInterface libraryInterface) {
+        this.libraryInterface = libraryInterface;
+        name = getOptionName();
     }
 }

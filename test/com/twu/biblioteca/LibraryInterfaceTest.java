@@ -15,10 +15,10 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by khusbooj on 13/01/15.
  */
-public class LibrarianInterfaceTest {
+public class LibraryInterfaceTest {
     private ArrayList<Item> books;
     private ArrayList<Item> movies;
-    LibrarianInterface librarianInterface;
+    LibraryInterface libraryInterface;
 
     @Before
     public void initializeBooks() throws IOException {
@@ -44,45 +44,45 @@ public class LibrarianInterfaceTest {
     }
     @Before
     public void initializeLibrarianInterface() {
-        librarianInterface = new LibrarianInterface(new Library(books),new Library(movies), new UserInterface());
+        libraryInterface = new LibraryInterface(new Library(books),new Library(movies), new UserInterface());
     }
     @Test
     public void shouldCheckSuccessfulCheckoutMessage()  {
-        assertTrue(librarianInterface.checkOutProcessOfBook("Sherlock Holmes"));
+        assertTrue(libraryInterface.checkOutProcessOfBook("Sherlock Holmes"));
     }
     @Test
     public void shouldCheckUnsuccessfulCheckoutMessage()  {
-        assertFalse(librarianInterface.checkOutProcessOfBook("Harry Potter"));
+        assertFalse(libraryInterface.checkOutProcessOfBook("Harry Potter"));
     }
 
 
     @Test
     public void shouldCheckSuccessfulCheckinMessage()  {
         String bookName = "Terms & Conditions";
-        librarianInterface.checkOutProcessOfBook(bookName);
-        assertTrue(librarianInterface.checkInProcessOfBook(bookName));
+        libraryInterface.checkOutProcessOfBook(bookName);
+        assertTrue(libraryInterface.checkInProcessOfBook(bookName));
     }
 
     @Test
     public void shouldCheckUnsucessfulCheckinStatus() {
-        assertFalse(librarianInterface.checkInProcessOfBook("Harry"));
+        assertFalse(libraryInterface.checkInProcessOfBook("Harry"));
     }
     @Test
     public void shouldCheckSuccessfulMessageOfCheckoutOfMovie() {
-        assertTrue(librarianInterface.checkOutProcessOfMovie("Inception"));
+        assertTrue(libraryInterface.checkOutProcessOfMovie("Inception"));
     }
     @Test
     public void shouldCheckUnuccessfulMessageOfCheckoutOfMovie() {
-        assertFalse(librarianInterface.checkOutProcessOfMovie("Harry"));
+        assertFalse(libraryInterface.checkOutProcessOfMovie("Harry"));
     }
     @Test
     public void shouldCheckSuccessfulMessageOfCheckinOfMovie() {
         String movieName = "Inception";
-        librarianInterface.checkOutProcessOfMovie(movieName);
-        assertTrue(librarianInterface.checkInProcessMovie(movieName));
+        libraryInterface.checkOutProcessOfMovie(movieName);
+        assertTrue(libraryInterface.checkInProcessMovie(movieName));
     }
     @Test
     public void shouldCheckUnsuccessfulCheckinMessageOfMovie()  {
-        assertFalse(librarianInterface.checkInProcessMovie("Harry"));
+        assertFalse(libraryInterface.checkInProcessMovie("Harry"));
     }
 }

@@ -6,17 +6,17 @@ public class QuitOption extends Option {
     private MenuInterface menuInterface;
 
     @Override
-    public void performedAction() {
+    public void execute() {
         menuInterface.stopApp();
     }
 
     public QuitOption(MenuInterface menuInterface) {
         this.menuInterface = menuInterface;
-        this.name = setOptionName();
+        this.name = getOptionName();
     }
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "Quit";
     }
 

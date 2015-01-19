@@ -15,12 +15,11 @@ public class Book extends Item {
         this.year = year;
     }
 
-    public ArrayList<String> details() {
-        ArrayList<String> detail = new ArrayList<String>();
-        detail.add(name);
-        detail.add(author);
-        detail.add(year);
-        return detail;
+    public String getAuthor() {
+        return author;
     }
 
+    public String getYear() {
+        return year;
+    }
 }

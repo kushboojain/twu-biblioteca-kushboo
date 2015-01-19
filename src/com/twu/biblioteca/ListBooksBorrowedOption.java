@@ -4,21 +4,21 @@ package com.twu.biblioteca;
  * Created by khusbooj on 16/01/15.
  */
 public class ListBooksBorrowedOption extends Option {
-    private LibrarianInterface librarianInterface;
+    private LibraryInterface libraryInterface;
 
-    public ListBooksBorrowedOption(LibrarianInterface librarianInterface) {
-        name = setOptionName();
-        this.librarianInterface = librarianInterface;
+    public ListBooksBorrowedOption(LibraryInterface libraryInterface) {
+        name = getOptionName();
+        this.libraryInterface = libraryInterface;
     }
 
     @Override
-    public void performedAction() {
-        librarianInterface.listBorrowedBooks();
+    public void execute() {
+        libraryInterface.listBorrowedBooks();
 
     }
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "List Borrowed Books";
     }
 }

@@ -4,21 +4,21 @@ package com.twu.biblioteca;
  * Created by khusbooj on 15/01/15.
  */
 public class ReturnMovieOption extends Option {
-    LibrarianInterface librarianInterfaceInterface;
+    LibraryInterface libraryInterfaceInterface;
 
 
-    public ReturnMovieOption(LibrarianInterface librarianInterfaceInterface) {
-        name = setOptionName();
-        this.librarianInterfaceInterface = librarianInterfaceInterface;
+    public ReturnMovieOption(LibraryInterface libraryInterfaceInterface) {
+        name = getOptionName();
+        this.libraryInterfaceInterface = libraryInterfaceInterface;
     }
     @Override
-    public void performedAction() {
-        librarianInterfaceInterface.performCheckinOfMovie();
+    public void execute() {
+        libraryInterfaceInterface.performCheckinOfMovie();
     }
 
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "Return Movie";
 
     }

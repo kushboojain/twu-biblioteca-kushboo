@@ -7,17 +7,17 @@ public class ListCustomerDetailsOption extends Option {
     private LoginInterface loginInterface;
 
     public ListCustomerDetailsOption(LoginInterface loginInterface) {
-        name = setOptionName();
+        name = getOptionName();
         this.loginInterface = loginInterface;
     }
 
     @Override
-    public void performedAction() {
+    public void execute() {
         loginInterface.listDetails();
     }
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "My Details";
     }
 }

@@ -12,6 +12,6 @@ import static org.junit.Assert.assertEquals;
 public class CheckoutMovieOptionTest {
     @Test
     public void shouldCheckOptionName() {
-        assertEquals(new CheckoutMovieOption(new LibrarianInterface(new Library(new ArrayList<Item>()), new Library(new ArrayList<Item>()), new UserInterface())).getOptionName(), "Checkout Movie");
+        assertEquals(new CheckoutMovieOption(new LibraryInterface(new Library(new ArrayList<Item>()), new Library(new ArrayList<Item>()), new UserInterface())).getOptionName(), "Checkout Movie");
     }
 }

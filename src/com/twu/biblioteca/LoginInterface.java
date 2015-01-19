@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class LoginInterface {
 
     private UserInterface userInterface;
-    private ArrayList<CustomerDetails> customers;
+    private ArrayList<Customer> customers;
+    private Customer loggedInCustomer;
     private MenuInterface menuInterface;
-    private CustomerDetails loggedInCustomer;
 
-    public LoginInterface(UserInterface userInterface, ArrayList<CustomerDetails> customers, MenuInterface menuInterface) {
+    public LoginInterface(UserInterface userInterface, ArrayList<Customer> customers,MenuInterface menuInterface) {
         this.userInterface = userInterface;
         this.customers = customers;
         this.menuInterface = menuInterface;
@@ -20,26 +20,33 @@ public class LoginInterface {
 
     public void signIn() {
         loggedInCustomer = performSignIn();
-        menuInterface.setLoggedInCustomer(loggedInCustomer);
+        menuInterface.libraryInterface.setLoggedInCustomer(loggedInCustomer);
         userInterface.displaySignInStatus(getStatusOfLogin(loggedInCustomer));
-        menuInterface.updateListAfterLogin();
+        menuInterface.updateListAfterLogin(loggedInCustomer);
     }
 
-    private CustomerDetails performSignIn() {
+    private Customer performSignIn() {
         String number = userInterface.signinNumber();
         String password = userInterface.signinPassword();
-        return getCustomerDetails(number, password);
+        Customer customer = getCustomerDetails(number);
+        if(customer != null) {
+            if(customer.checkValidPassword(password))
+                return customer;
+            else
+                return null;
+        }
+        return null;
     }
 
-    private CustomerDetails getCustomerDetails(String number, String password) {
-        for (CustomerDetails customer : customers) {
-            if(customer.getLibraryNumber().equals(number) && customer.getPassword().equals(password))
+    private Customer getCustomerDetails(String number) {
+        for (Customer customer : customers) {
+            if(customer.getLibraryNumber().equals(number))
                 return customer;
         }
         return null;
     }
 
-    boolean getStatusOfLogin(CustomerDetails loggedInCustomer) {
+    boolean getStatusOfLogin(Customer loggedInCustomer) {
         if(loggedInCustomer != null)
             return true;
         else
@@ -48,12 +55,12 @@ public class LoginInterface {
 
     public void signOut() {
         loggedInCustomer = null;
-        menuInterface.setLoggedInCustomer(null);
+        menuInterface.libraryInterface.setLoggedInCustomer(null);
         userInterface.displaySignOutMessage();
-        menuInterface.updateListAfterLogout();
+        menuInterface.updateListAfterLogout(null);
     }
 
     public void listDetails() {
-        userInterface.displayCustomerDetails(loggedInCustomer.getDetails());
+        userInterface.displayCustomerDetails(loggedInCustomer);
     }
 }

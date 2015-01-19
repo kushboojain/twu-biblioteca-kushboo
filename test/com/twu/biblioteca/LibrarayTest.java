@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.TestCase.assertNull;
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 /**
@@ -22,7 +23,6 @@ import static org.junit.Assert.assertFalse;
 public class LibrarayTest {
     private ArrayList<Item> books = new ArrayList<Item>();
     Library biblioteca;
-    private ArrayList<ArrayList<String>> actualDetails = new ArrayList<ArrayList<String>>();
     @Before
     public void initializeBooks() throws IOException {
         books = new ArrayList<Item>();
@@ -38,14 +38,12 @@ public class LibrarayTest {
 
 
     @Test
-    public void shouldCheckAvailableBooksDetails()  {
-        ArrayList<ArrayList<String>> expectedDetails = biblioteca.getAvailableItemDetails();
-        for (int i = 0, detailsSize = actualDetails.size(); i < detailsSize; i++) {
-            ArrayList<String> actualDetail = actualDetails.get(i);
-            ArrayList<String> expectedDetail = expectedDetails.get(i);
-            for (int j = 0, detailSize = actualDetail.size(); j < detailSize; j++) {
-                Assert.assertEquals(actualDetail.get(j), expectedDetail.get(j));
-            }
+    public void shouldCheckAvailableBooksDetails() {
+        ArrayList<Item> expectedDetails = biblioteca.getAvailableItemDetails();
+        for (int i = 0, detailsSize = books.size(); i < detailsSize; i++) {
+            Item actualDetail = books.get(i);
+            Item expectedDetail = expectedDetails.get(i);
+            assertEquals(actualDetail,expectedDetail);
         }
     }
     @Test

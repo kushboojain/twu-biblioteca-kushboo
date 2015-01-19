@@ -12,6 +12,6 @@ import static org.junit.Assert.assertEquals;
 public class ReturnOptionTest {
     @Test
     public void shouldCheckReturnOptionName() {
-        assertEquals(new ReturnBookOption(new LibrarianInterface(new Library(new ArrayList<Item>()),new Library(new ArrayList<Item>()), new UserInterface())).getOptionName(), "Return Book");
+        assertEquals(new ReturnBookOption(new LibraryInterface(new Library(new ArrayList<Item>()),new Library(new ArrayList<Item>()), new UserInterface())).getOptionName(), "Return Book");
     }
 }

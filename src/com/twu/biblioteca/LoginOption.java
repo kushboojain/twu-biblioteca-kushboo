@@ -7,17 +7,17 @@ public class LoginOption extends Option {
     LoginInterface loginInterface;
 
     public LoginOption(LoginInterface loginInterface) {
-        name = setOptionName();
+        name = getOptionName();
         this.loginInterface = loginInterface;
     }
 
     @Override
-    public void performedAction() {
+    public void execute() {
        loginInterface.signIn();
     }
 
     @Override
-    protected String setOptionName() {
+    protected String getOptionName() {
         return "SignIn";
     }
 

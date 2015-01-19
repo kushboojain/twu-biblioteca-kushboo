@@ -14,6 +14,6 @@ public class QuitOptionTest {
     public void shouldCheckQuitOptionName() {
         UserInterface userInterface = new UserInterface();
         ArrayList<Item> items = new ArrayList<Item>();
-        assertEquals("Quit", new QuitOption(new MenuInterface(new LibrarianInterface(new Library(items), new Library(items), userInterface),userInterface,new ArrayList<CustomerDetails>(),new BibliotecaApp() )).getOptionName());
+        assertEquals("Quit", new QuitOption(new MenuInterface(new LibraryInterface(new Library(items), new Library(items), userInterface),userInterface,new ArrayList<Customer>(),new BibliotecaApp() )).getOptionName());
     }
 }
