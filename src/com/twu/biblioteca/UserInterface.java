@@ -108,30 +108,25 @@ public class UserInterface {
         print("PhNo: " + customerLoggedInDetails.getPhno() + "\n");
     }
 
-    public void displayBorrowedBooks(HashMap<String, String> borrowedBooks) {
+    public void displayBorrowedBooks(ArrayList<RentalDetailInterface> borrowedBooks) {
         if(borrowedBooks.isEmpty()) {
             print("No books are borrowed");
         }else {
             print("The borrowed books are (with customer number):\n");
-            Iterator it = borrowedBooks.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pairs = (Map.Entry) it.next();
-                print(pairs.getKey() + " : " + pairs.getValue());
-                it.remove();
+            for (RentalDetailInterface borrowedBook : borrowedBooks) {
+                print("Book name: "+borrowedBook.getItemName()+"\t\tUser Number: "+borrowedBook.getUserNumber()+"\n");
             }
+
         }
     }
 
-    public void displayBorrowedMovies(HashMap<String, String> borrowedMovies) {
+    public void displayBorrowedMovies(ArrayList<RentalDetailInterface> borrowedMovies) {
         if(borrowedMovies.isEmpty()) {
             print("No movies are borrowed");
         }else {
             print("The borrowed movies are (with customer number):\n");
-            Iterator it = borrowedMovies.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry pairs = (Map.Entry)it.next();
-                print(pairs.getKey() + " : " + pairs.getValue());
-                it.remove();
+            for (RentalDetailInterface borrowedMovie : borrowedMovies) {
+                print("Movie Name: "+borrowedMovie.getItemName()+"\t\tUser Number: "+borrowedMovie.getUserNumber()+"\n");
             }
         }
     }

@@ -1,6 +1,9 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by khusbooj on 13/01/15.
@@ -110,11 +113,27 @@ public class LibraryInterface {
     }
 
     public void listBorrowedBooks() {
-        userInterface.displayBorrowedBooks(books.getBorrowedItems());
+        ArrayList<RentalDetailInterface> rentalDetails = new ArrayList<RentalDetailInterface>();
+        HashMap<String, String> borrowedBooks = books.getBorrowedItems();
+        Iterator it = borrowedBooks.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            rentalDetails.add(new RentalDetailInterface((String) pairs.getKey(), (String) pairs.getValue()));
+            it.remove();
+        }
+        userInterface.displayBorrowedBooks(rentalDetails);
     }
 
     public void listBorrowedMovies() {
-        userInterface.displayBorrowedMovies(movies.getBorrowedItems());
+        ArrayList<RentalDetailInterface> rentalDetails = new ArrayList<RentalDetailInterface>();
+        HashMap<String, String> borrowedBooks = movies.getBorrowedItems();
+        Iterator it = borrowedBooks.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            rentalDetails.add( new RentalDetailInterface((String)pairs.getKey(),(String)pairs.getValue()));
+            it.remove();
+        }
+        userInterface.displayBorrowedMovies(rentalDetails);
     }
 
     public void setLoggedInCustomer(Customer loggedInCustomer) {
