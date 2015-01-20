@@ -72,14 +72,14 @@ public class LibrarayTest {
     public void shouldCheckPutEntryOfItem() {
         Book borrowedBook = (Book) books.get(0);
         biblioteca.putEntry(borrowedBook.getName(),"Henry");
-        assertTrue(biblioteca.getBorrowedItems().containsKey(borrowedBook.getName()));
+        assertNotNull(biblioteca.getItemForCheckout(borrowedBook.getName()));
     }
     @Test
     public void shouldCheckRemoveEntryOfItem() {
         Book borrowedBook = (Book) books.get(0);
         biblioteca.putEntry(borrowedBook.getName(),"Henry");
         biblioteca.removeEntry(borrowedBook.getName());
-        assertFalse(biblioteca.getBorrowedItems().containsKey(borrowedBook.getName()));
+        assertNotNull(biblioteca.getItemForCheckout(borrowedBook.getName()));
     }
 
 
