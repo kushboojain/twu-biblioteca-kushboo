@@ -48,18 +48,18 @@ public class LibraryInterfaceTest {
     }
     @Test
     public void shouldCheckSuccessfulCheckoutMessage()  {
-        assertTrue(libraryInterface.checkOutProcessOfBook("Sherlock Holmes"));
+        assertTrue(libraryInterface.checout("Sherlock Holmes"));
     }
     @Test
     public void shouldCheckUnsuccessfulCheckoutMessage()  {
-        assertFalse(libraryInterface.checkOutProcessOfBook("Harry Potter"));
+        assertFalse(libraryInterface.checout("Harry Potter"));
     }
 
 
     @Test
     public void shouldCheckSuccessfulCheckinMessage()  {
         String bookName = "Terms & Conditions";
-        libraryInterface.checkOutProcessOfBook(bookName);
+        libraryInterface.checout(bookName);
         assertTrue(libraryInterface.checkInProcessOfBook(bookName));
     }
 

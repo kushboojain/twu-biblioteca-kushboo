@@ -51,8 +51,15 @@ public class Library {
         return null;
     }
 
-    public HashMap<String, String> getBorrowedItems() {
-        return rentalRecords;
+    public ArrayList<RentalRecord> getBorrowedItems() {
+        ArrayList<RentalRecord> rentalDetails = new ArrayList<RentalRecord>();
+        Iterator it = rentalRecords.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry)it.next();
+            rentalDetails.add( new RentalRecord((String)pairs.getKey(),(String)pairs.getValue()));
+            it.remove();
+        }
+        return rentalDetails;
     }
 
     public void putEntry(String itemName, String loggedInCustomer) {

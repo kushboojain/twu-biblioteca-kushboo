@@ -23,7 +23,7 @@ public class LibraryInterface {
 
     public void performCheckoutOfBook() {
         String bookName = userInterface.getBookNameFromUser();
-        boolean status = checkOutProcessOfBook(bookName);
+        boolean status = checkout(bookName);
         userInterface.displayMessageOnCheckoutOfBook(status);
         if(status) {
             books.putEntry(bookName, loggedInCustomer.getLibraryNumber());
@@ -31,7 +31,7 @@ public class LibraryInterface {
     }
 
 
-    boolean checkOutProcessOfBook(String bookName) {
+    boolean checkout(String bookName) {
         Book borrowed;
         if((borrowed = (Book) books.getItemForCheckout(bookName)) != null){
             books.checkoutItem(borrowed);
@@ -113,27 +113,14 @@ public class LibraryInterface {
     }
 
     public void listBorrowedBooks() {
-        ArrayList<RentalDetailInterface> rentalDetails = new ArrayList<RentalDetailInterface>();
-        HashMap<String, String> borrowedBooks = books.getBorrowedItems();
-        Iterator it = borrowedBooks.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            rentalDetails.add(new RentalDetailInterface((String) pairs.getKey(), (String) pairs.getValue()));
-            it.remove();
-        }
-        userInterface.displayBorrowedBooks(rentalDetails);
+        ArrayList<RentalRecord> rentalRecords = books.getBorrowedItems();
+        userInterface.displayBorrowedBooks(rentalRecords);
     }
 
     public void listBorrowedMovies() {
-        ArrayList<RentalDetailInterface> rentalDetails = new ArrayList<RentalDetailInterface>();
-        HashMap<String, String> borrowedBooks = movies.getBorrowedItems();
-        Iterator it = borrowedBooks.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry)it.next();
-            rentalDetails.add( new RentalDetailInterface((String)pairs.getKey(),(String)pairs.getValue()));
-            it.remove();
-        }
-        userInterface.displayBorrowedMovies(rentalDetails);
+        ArrayList<RentalRecord> rentalRecords = movies.getBorrowedItems();
+        userInterface.displayBorrowedBooks(rentalRecords);
+
     }
 
     public void setLoggedInCustomer(Customer loggedInCustomer) {

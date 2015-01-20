@@ -108,24 +108,24 @@ public class UserInterface {
         print("PhNo: " + customerLoggedInDetails.getPhno() + "\n");
     }
 
-    public void displayBorrowedBooks(ArrayList<RentalDetailInterface> borrowedBooks) {
+    public void displayBorrowedBooks(ArrayList<RentalRecord> borrowedBooks) {
         if(borrowedBooks.isEmpty()) {
             print("No books are borrowed");
         }else {
             print("The borrowed books are (with customer number):\n");
-            for (RentalDetailInterface borrowedBook : borrowedBooks) {
+            for (RentalRecord borrowedBook : borrowedBooks) {
                 print("Book name: "+borrowedBook.getItemName()+"\t\tUser Number: "+borrowedBook.getUserNumber()+"\n");
             }
 
         }
     }
 
-    public void displayBorrowedMovies(ArrayList<RentalDetailInterface> borrowedMovies) {
+    public void displayBorrowedMovies(ArrayList<RentalRecord> borrowedMovies) {
         if(borrowedMovies.isEmpty()) {
             print("No movies are borrowed");
         }else {
             print("The borrowed movies are (with customer number):\n");
-            for (RentalDetailInterface borrowedMovie : borrowedMovies) {
+            for (RentalRecord borrowedMovie : borrowedMovies) {
                 print("Movie Name: "+borrowedMovie.getItemName()+"\t\tUser Number: "+borrowedMovie.getUserNumber()+"\n");
             }
         }
